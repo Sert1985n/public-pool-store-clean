@@ -1,0 +1,39 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/zephyr:latest with your built image.
+# Source repo: https://github.com/ZephyrProtocol/zephyr
+name: retro-mike-zephyr
+services:
+  app:
+    container_name: zeph
+    image: local/zephyr:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/zephyr:/root/.zephyr
+    ports:
+      - "17767:17767"
+      - "18080:18080"
+    command:
+      - /usr/local/bin/zephyrd
+      - --non-interactive
+      - --confirm-external-bind
+      - --out-peers=32
+      - --p2p-bind-ip=0.0.0.0
+      - --p2p-bind-port=18080
+      - --rpc-bind-ip=0.0.0.0
+      - --rpc-bind-port=17767
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Zephyr Protocol node template. Build/import image first from the official source repository.
+  tagline:
+    en_us: Build-required node template for ZEPH.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/zephyr/icon.png
+  thumbnail: ""
+  title:
+    en_us: Zephyr (ZEPH) Node Template
+  category: RetroMike
+  port_map: "17767"

@@ -1,0 +1,28 @@
+name: retro-mike-wojakcoin
+services:
+  app:
+    container_name: wjk
+    image: theretromike/nodes:wojak
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/wjk:/root/.wojakcoin
+    ports:
+      - "7017:7017"
+      - "9017:9017"
+    command: "/usr/bin/wojakcoind -printtoconsole -server -prune=550 -wallet=default -zmqpubhashblock=tcp://0.0.0.0:7017 -rpcbind=0.0.0.0 -rpcport=9017 -rpcallowip=0.0.0.0/0 -rpcuser=pooluser -rpcpassword=poolpassword"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Wojakcoin Cryptocurrency Node. Can be used in conjunction with Miningcore Apps to solo mine.
+  tagline:
+    en_us: Wojakcoin Cryptocurrency Node.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/wojakcoin/icon.png
+  thumbnail: ""
+  title:
+    en_us: Wojakcoin (WJK) Node
+  category: RetroMike
+  port_map: "8888"

@@ -1,0 +1,29 @@
+name: retro-mike-peercoin
+services:
+  app:
+    container_name: ppc
+    image: theretromike/nodes:peercoin
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/ppc:/root/.peercoin
+    ports:
+      - "7012:7012"
+      - "9012:9012"
+      - "9901:9901"
+    command: "/usr/bin/peercoind -printtoconsole -server -wallet=default -zmqpubhashblock=tcp://0.0.0.0:7012 -rpcbind=0.0.0.0 -rpcport=9012 -rpcallowip=0.0.0.0/0 -port=9901 -rpcuser=pooluser -rpcpassword=poolpassword"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Peercoin Cryptocurrency Node. Can be used in conjunction with Miningcore Apps to solo mine.
+  tagline:
+    en_us: Peercoin Cryptocurrency Node.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/peercoin/icon.png
+  thumbnail: ""
+  title:
+    en_us: Peercoin (PPC) Node
+  category: RetroMike
+  port_map: "8888"

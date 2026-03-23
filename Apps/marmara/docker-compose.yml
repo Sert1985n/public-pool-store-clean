@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/marmara:latest with your built image.
+# Source repo: https://github.com/marmarachain/marmara
+name: retro-mike-marmara
+services:
+  app:
+    container_name: marmara
+    image: local/marmara:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/marmara:/root/.komodo/MCL
+    ports:
+      - "7032:7032"
+      - "9032:9032"
+      - "33824:33824"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Marmara Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for MCL.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/marmara/icon.png
+  thumbnail: ""
+  title:
+    en_us: Marmara Node Template
+  category: RetroMike
+  port_map: "8888"

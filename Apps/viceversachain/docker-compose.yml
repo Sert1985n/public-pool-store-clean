@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/viceversachain:latest with your built image.
+# Source repo: https://github.com/Viceversachain/Viceversachain
+name: retro-mike-viceversachain
+services:
+  app:
+    container_name: viceversachain
+    image: local/viceversachain:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/viceversachain:/root/.viceversachain
+    ports:
+      - "7027:7027"
+      - "9027:9027"
+      - "9444:9444"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: ViceversaChain Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for VICE.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/viceversachain/icon.png
+  thumbnail: ""
+  title:
+    en_us: ViceversaChain Node Template
+  category: RetroMike
+  port_map: "8888"

@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/nito:latest with your built image.
+# Source repo: https://github.com/NitoNetwork/Nito-core
+name: retro-mike-nito
+services:
+  app:
+    container_name: nito
+    image: local/nito:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/nito:/root/.nitocore
+    ports:
+      - "7024:7024"
+      - "9024:9024"
+      - "8626:8626"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Nito (NITO) Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for NITO.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/nito/icon.png
+  thumbnail: ""
+  title:
+    en_us: Nito (NITO) Node Template
+  category: RetroMike
+  port_map: "8888"

@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/squishycoinqt:latest with your built image.
+# Source repo: https://github.com/sqcndev/SquishyCoinQT
+name: retro-mike-squishycoinqt
+services:
+  app:
+    container_name: squishycoinqt
+    image: local/squishycoinqt:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/squishycoinqt:/root/.squishycoinqt
+    ports:
+      - "7031:7031"
+      - "9031:9031"
+      - "11111:11111"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: SquishyCoinQT Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for SQC.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/squishycoinqt/icon.png
+  thumbnail: ""
+  title:
+    en_us: SquishyCoinQT Node Template
+  category: RetroMike
+  port_map: "8888"

@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/pirate:latest with your built image.
+# Source repo: https://github.com/PirateNetwork/pirate
+name: retro-mike-pirate
+services:
+  app:
+    container_name: pirate
+    image: local/pirate:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/pirate:/root/.komodo/PIRATE
+    ports:
+      - "7033:7033"
+      - "9033:9033"
+      - "45450:45450"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Pirate (ARRR) Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for ARRR.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/pirate/icon.png
+  thumbnail: ""
+  title:
+    en_us: Pirate (ARRR) Node Template
+  category: RetroMike
+  port_map: "8888"

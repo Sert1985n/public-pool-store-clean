@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/tokel:latest with your built image.
+# Source repo: https://github.com/TokelPlatform/tokel_dapp
+name: retro-mike-tokel
+services:
+  app:
+    container_name: tokel
+    image: local/tokel:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/tokel:/root/.komodo/tokel
+    ports:
+      - "7030:7030"
+      - "9030:9030"
+      - "29404:29404"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Tokel (TKL) Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for TKL.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/tokel/icon.png
+  thumbnail: ""
+  title:
+    en_us: Tokel (TKL) Node Template
+  category: RetroMike
+  port_map: "8888"

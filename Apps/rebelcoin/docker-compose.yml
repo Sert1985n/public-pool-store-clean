@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/rebelcoin:latest with your built image.
+# Source repo: https://rebelcoin.io/
+name: retro-mike-rebelcoin
+services:
+  app:
+    container_name: rebelcoin
+    image: local/rebelcoin:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/rebelcoin:/root/.rebelcoin
+    ports:
+      - "7023:7023"
+      - "9023:9023"
+      - "9233:9233"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: RebelCoin Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for REBEL.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/rebelcoin/icon.png
+  thumbnail: ""
+  title:
+    en_us: RebelCoin Node Template
+  category: RetroMike
+  port_map: "8888"

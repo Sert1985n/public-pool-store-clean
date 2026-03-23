@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/bitcoinoil:latest with your built image.
+# Source repo: https://github.com/escapeneo/bitcoinoil
+name: retro-mike-bitcoinoil
+services:
+  app:
+    container_name: bitcoinoil
+    image: local/bitcoinoil:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/bitcoinoil:/root/.bitcoinoil
+    ports:
+      - "7025:7025"
+      - "9025:9025"
+      - "8333:8333"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Bitcoin Oil (OIL) Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for OIL.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoinoil/icon.png
+  thumbnail: ""
+  title:
+    en_us: Bitcoin Oil (OIL) Node Template
+  category: RetroMike
+  port_map: "8888"

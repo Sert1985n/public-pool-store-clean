@@ -1,0 +1,29 @@
+name: retro-mike-litecoin
+services:
+  app:
+    container_name: ltc
+    image: theretromike/nodes:litecoin
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/ltc:/root/.litecoin
+    ports:
+      - "7020:7020"
+      - "9020:9020"
+      - "9333:9333"
+    command: "/usr/bin/litecoind -printtoconsole -server -prune=550 -wallet=default -zmqpubhashblock=tcp://0.0.0.0:7020 -rpcbind=0.0.0.0 -rpcport=9020 -rpcallowip=0.0.0.0/0 -port=9333 -rpcuser=pooluser -rpcpassword=poolpassword"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Litecoin Cryptocurrency Node. Can be used in conjunction with Miningcore Apps to solo mine.
+  tagline:
+    en_us: Litecoin Cryptocurrency Node.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/litecoin/icon.png
+  thumbnail: ""
+  title:
+    en_us: Litecoin (LTC) Node
+  category: RetroMike
+  port_map: "8888"

@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/emark:latest with your built image.
+# Source repo: https://github.com/emarkproject/eMark
+name: retro-mike-emark
+services:
+  app:
+    container_name: emark
+    image: local/emark:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/emark:/root/.emark
+    ports:
+      - "7022:7022"
+      - "9022:9022"
+      - "31337:31337"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Deutsche eMark (DEM) Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for DEM.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/emark/icon.png
+  thumbnail: ""
+  title:
+    en_us: Deutsche eMark (DEM) Node Template
+  category: RetroMike
+  port_map: "8888"

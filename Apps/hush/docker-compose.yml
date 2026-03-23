@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/hush:latest with your built image.
+# Source repo: https://git.hush.is/hush/hush3
+name: retro-mike-hush
+services:
+  app:
+    container_name: hush
+    image: local/hush:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/hush:/root/.hush3
+    ports:
+      - "7034:7034"
+      - "9034:9034"
+      - "8822:8822"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Hush Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for HUSH.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/hush/icon.png
+  thumbnail: ""
+  title:
+    en_us: Hush Node Template
+  category: RetroMike
+  port_map: "8888"

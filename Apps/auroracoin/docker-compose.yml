@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/auroracoin:latest with your built image.
+# Source repo: https://github.com/aurarad/auroracoin
+name: retro-mike-auroracoin
+services:
+  app:
+    container_name: auroracoin
+    image: local/auroracoin:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/auroracoin:/root/.auroracoin
+    ports:
+      - "7021:7021"
+      - "9021:9021"
+      - "12340:12340"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Auroracoin (AUR) Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for AUR.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/auroracoin/icon.png
+  thumbnail: ""
+  title:
+    en_us: Auroracoin (AUR) Node Template
+  category: RetroMike
+  port_map: "8888"

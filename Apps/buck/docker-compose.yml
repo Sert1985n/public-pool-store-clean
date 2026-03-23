@@ -1,0 +1,31 @@
+# TEMPLATE APP
+# Build/publish image from source first, then replace local/buck:latest with your built image.
+# Source repo: https://github.com/BuckCoin/buck
+name: retro-mike-buck
+services:
+  app:
+    container_name: buck
+    image: local/buck:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/buck:/root/.buck
+    ports:
+      - "7029:7029"
+      - "9029:9029"
+      - "15557:15557"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Buck (BUCK) Node Template. Template added to project structure. Build/import image first.
+  tagline:
+    en_us: Build-required node template for BUCK.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/buck/icon.png
+  thumbnail: ""
+  title:
+    en_us: Buck (BUCK) Node Template
+  category: RetroMike
+  port_map: "8888"

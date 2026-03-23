@@ -5,9 +5,31 @@ services:
     restart: unless-stopped
     ports:
       - "8501:80"
-    volumes:
-      - ./html:/usr/share/nginx/html:ro
-      - ./default.conf:/etc/nginx/conf.d/default.conf:ro
+    command:
+      - /bin/sh
+      - -lc
+      - |
+        set -eu
+        mkdir -p /usr/share/nginx/html /etc/nginx/conf.d
+        cat > /etc/nginx/conf.d/default.conf <<'EOF_CONF'
+        server { listen 80; server_name _; root /usr/share/nginx/html; index index.html; location / { try_files $uri $uri/ /index.html; } }
+        EOF_CONF
+        cat > /usr/share/nginx/html/index.html <<'EOF_HTML'
+        <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BTC — public-pool-btc.ru</title><link rel="stylesheet" href="/styles.css"></head><body><div class="container"><div class="topbar"><div><div class="brand">Bitcoin (BTC)</div><div class="subtitle">Эталонная страница 8501</div></div><div class="nav"><a class="btn" href="#blocks">Blocks</a><a class="btn" href="#miners">Miners</a><a class="btn" href="#help">Help</a><a class="btn" href="/" id="homeLink">Pools</a></div></div><div class="hero"><h1>BTC SOLO</h1><p>Страница BTC. Кнопка Pools ведёт на 8500. Данные берутся с текущего сервера.</p></div><section class="grid"><div class="panel"><h3>Текущая статистика</h3><div id="stats">Загрузка...</div></div><div class="panel" id="help"><h3>Help</h3><div class="help-line">Port: <b>6004</b></div><div class="help-line">RPC: <b>9004</b></div><div class="help-line">ZMQ: <b>7004</b></div><div class="help-line">Fee: <b>1.5%</b></div></div></section><section id="blocks" class="panel"><h3>Blocks</h3><div id="blocksContent">Загрузка...</div></section><section id="miners" class="panel"><h3>Miners</h3><div id="minersContent">Загрузка...</div></section><footer class="footer">© public-pool-btc.ru - 2026</footer></div><script src="/config.js"></script><script src="/app.js"></script></body></html>
+        EOF_HTML
+        cat > /usr/share/nginx/html/styles.css <<'EOF_CSS'
+        
+        :root{--bg:#0b0f16;--panel:#111827;--panel2:#0f172a;--line:rgba(255,255,255,.08);--text:#e5e7eb;--muted:#9ca3af;--accent:#f59e0b;}*{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111c,#0b0f16 30%,#0b0f16);color:var(--text);font-family:Inter,Arial,sans-serif}a{color:inherit;text-decoration:none}.container{max-width:1180px;margin:0 auto;padding:20px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:24px}.brand{font-size:32px;font-weight:800}.subtitle{color:var(--muted);margin-top:6px}.nav{display:flex;gap:10px;flex-wrap:wrap}.btn{background:#1f2937;border:1px solid var(--line);padding:10px 14px;border-radius:12px}.hero,.panel{background:linear-gradient(180deg,#111827,#0f172a);border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:18px}.hero h1,.panel h3{margin:0 0 10px}.grid{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}.help-line{padding:8px 0;border-bottom:1px solid var(--line)}.footer{margin-top:26px;color:var(--muted);text-align:center;padding:10px 0}.item{padding:8px 0;border-bottom:1px solid var(--line)}@media (max-width:900px){.grid{grid-template-columns:1fr}}
+        
+        EOF_CSS
+        cat > /usr/share/nginx/html/config.js <<'EOF_CFG'
+        window.PUBLIC_POOL_UI={coinId:'btc',coinTitle:'Bitcoin',coinSymbol:'BTC',apiBase:`${location.protocol}//${location.hostname}:4000/api`,siteBase:`${location.protocol}//${location.hostname}`,ports:{home:8500,btc:8501}};
+        EOF_CFG
+        cat > /usr/share/nginx/html/app.js <<'EOF_JS'
+        const UI=window.PUBLIC_POOL_UI;const fmt=n=>{n=Number(n);if(!Number.isFinite(n)||n<=0)return '—';const u=['H/s','KH/s','MH/s','GH/s','TH/s','PH/s','EH/s'];let i=0;while(n>=1000&&i<u.length-1){n/=1000;i++}return `${n.toFixed(n>=100?0:n>=10?1:2)} ${u[i]}`};document.getElementById('homeLink').href=`${UI.siteBase}:${UI.ports.home}`;async function load(){try{const r=await fetch(`${UI.apiBase}/pools`);const arr=r.ok?await r.json():[];const p=(Array.isArray(arr)?arr:[]).find(x=>x.id===UI.coinId)||{};document.getElementById('stats').innerHTML=`<div class="item">Pool hashrate: <b>${fmt(p.poolStats?.poolHashrate||p.poolHashrate)}</b></div><div class="item">Network hashrate: <b>${fmt(p.networkStats?.networkHashrate||p.networkHashrate)}</b></div><div class="item">Connected miners: <b>${p.poolStats?.connectedMiners ?? p.connectedMiners ?? 0}</b></div><div class="item">Blocks found: <b>${p.poolStats?.totalBlocks ?? p.totalBlocks ?? 0}</b></div>`;const blocks=p.blocks||[];document.getElementById('blocksContent').innerHTML=blocks.length?blocks.slice(0,10).map(b=>`<div class="item">${b.blockHeight ?? b.height ?? '—'} · ${b.status ?? 'confirmed'}</div>`).join(''):'<div class="item">Нет данных</div>';const miners=p.miners||p.topMiners||[];document.getElementById('minersContent').innerHTML=miners.length?miners.slice(0,10).map(m=>`<div class="item">${m.miner ?? m.address ?? m.worker ?? 'miner'} · ${fmt(m.hashrate ?? m.sharesPerSecond ?? 0)}</div>`).join(''):'<div class="item">Нет данных</div>';}
+        catch(e){document.getElementById('stats').textContent='Ошибка загрузки API';document.getElementById('blocksContent').textContent='Ошибка загрузки API';document.getElementById('minersContent').textContent='Ошибка загрузки API';}}load();
+        EOF_JS
+        exec nginx -g 'daemon off;'
 x-casaos:
   architectures:
     - amd64
@@ -21,7 +43,7 @@ x-casaos:
   title:
     en_us: "Public Pool Web UI BTC"
   tagline:
-    en_us: "BTC reference page 8501"
+    en_us: "Custom public-pool-btc.ru Web UI"
   description:
-    en_us: "Custom public-pool-btc.ru BTC page with Home, Blocks, Miners, Help and Pools link to 8500."
+    en_us: "Self-contained Web UI app for public-pool-btc.ru without external file mounts."
   port_map: "8501"

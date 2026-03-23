@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bitcoin (BTC) — SOLO Mining Pool</title>
+  <meta name="description" content="Public Pool BTC RU Bitcoin page with Help, Blocks, Miners and Pools link back to 8500.">
+  <link rel="icon" type="image/png" href="/coin.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div>
+        <div class="brand"><img src="/icons/btc.png" alt="BTC"><div><div>Bitcoin (BTC)</div><div class="subtitle">8501 BTC reference page · Pools always return to 8500</div></div></div>
+      </div>
+      <a class="badge" href="http://" onclick="event.preventDefault(); location.href = `${location.protocol}//${location.hostname}:8500`;">POOLS → 8500</a>
+    </div>
+    <div id="app"></div>
+    <div class="footer" id="footer-text">Bitcoin (BTC) © public-pool-btc.ru - 2026</div>
+  </div>
+  <script src="/config.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if(!location.hash || location.hash === '#') location.hash = '#/btc/home';
+    });
+  </script>
+  <script src="/app.js"></script>
+</body>
+</html>

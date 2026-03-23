@@ -1,0 +1,34 @@
+name: postgresql
+services:
+  app:
+    container_name: postgresql
+    image: postgres:17.4
+    restart: unless-stopped
+    volumes:
+      - /media/ZimaOS-HD/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=miningcore
+      - POSTGRES_USER=miningcore
+      - POSTGRES_PASSWORD=miningcore
+      - TZ=Europe/Berlin
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: app
+  store_app_id: postgres
+  category: Core Services
+  title:
+    en_us: PostgreSQL
+  tagline:
+    en_us: PostgreSQL database for Miningcore
+  description:
+    en_us: PostgreSQL database service for Miningcore data, shares, payouts and statistics.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/postgres/icon.png
+  thumbnail: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/postgres/icon.png
+  port_map: "5432"

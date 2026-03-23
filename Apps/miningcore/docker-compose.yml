@@ -1,0 +1,33 @@
+name: miningcore
+services:
+  app:
+    container_name: miningcore
+    image: theretromike/miningcore:latest
+    restart: unless-stopped
+    volumes:
+      - /media/ZimaOS-HD/miningcore/coins.json:/app/build/coins.json
+      - /media/ZimaOS-HD/miningcore/config.json:/app/config.json
+      - /media/ZimaOS-HD/vtc:/.vertcoin
+    ports:
+      - "4000:4000"
+      - "6001-6025:6001-6025"
+      - "6201-6225:6201-6225"
+      - "6301-6325:6301-6325"
+      - "6401-6425:6401-6425"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  store_app_id: miningcore
+  category: Core Services
+  title:
+    en_us: Miningcore
+  tagline:
+    en_us: Mining pool backend
+  description:
+    en_us: Miningcore backend for multi-coin pool operation.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/miningcore/icon.png
+  thumbnail: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/miningcore/icon.png
+  port_map: "4000"

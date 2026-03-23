@@ -1,0 +1,38 @@
+[
+  {
+    "appid": "public-pool-webui-home"
+  },
+  {
+    "appid": "public-pool-webui-btc"
+  },
+  {
+    "appid": "miningcore"
+  },
+  {
+    "appid": "miningcore-webui"
+  },
+  {
+    "appid": "postgres"
+  },
+  {
+    "appid": "bitcoin"
+  },
+  {
+    "appid": "bitcoin-cash"
+  },
+  {
+    "appid": "dogecoin"
+  },
+  {
+    "appid": "litecoin"
+  },
+  {
+    "appid": "peercoin"
+  },
+  {
+    "appid": "ravencoin"
+  },
+  {
+    "appid": "monero"
+  }
+]

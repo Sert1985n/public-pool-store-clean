@@ -1,0 +1,16 @@
+{
+  "bitcoin-cash-ii": {
+    "name": "Bitcoin Cash II",
+    "canonicalName": "Bitcoin-Cash-II",
+    "symbol": "BCH2",
+    "family": "bitcoin",
+    "explorerBlockLink": "",
+    "explorerTxLink": "",
+    "explorerAccountLink": "",
+    "website": "",
+    "market": "",
+    "twitter": "",
+    "telegram": "",
+    "discord": ""
+  }
+}

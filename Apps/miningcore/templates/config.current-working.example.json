@@ -1,0 +1,1512 @@
+{
+  "logging": {
+    "level": "info",
+    "enableConsoleLog": true,
+    "enableConsoleColors": true,
+    "logFile": "",
+    "apiLogFile": "",
+    "logBaseDirectory": "",
+    "perPoolLogFile": true
+  },
+  "banning": {
+    "manager": "Integrated",
+    "banOnJunkReceive": true,
+    "banOnInvalidShares": false
+  },
+  "notifications": {
+    "enabled": false,
+    "email": {
+      "host": "smtp.example.com",
+      "port": 587,
+      "user": "user",
+      "password": "password",
+      "fromAddress": "info@yourpool.org",
+      "fromName": "support"
+    },
+    "admin": {
+      "enabled": false,
+      "emailAddress": "user@example.com",
+      "notifyBlockFound": true
+    }
+  },
+  "persistence": {
+    "postgres": {
+      "host": "__SERVER_HOST__",
+      "port": 5432,
+      "user": "miningcore",
+      "password": "miningcore",
+      "database": "miningcore"
+    }
+  },
+  "paymentProcessing": {
+    "enabled": true,
+    "interval": 600,
+    "shareRecoveryFile": "recovered-shares.txt",
+    "coinbaseString": "Mined with RMT Node"
+  },
+  "api": {
+    "enabled": true,
+    "listenAddress": "*",
+    "port": 4000,
+    "metricsIpWhitelist": [],
+    "rateLimiting": {
+      "disabled": true,
+      "rules": [
+        {
+          "Endpoint": "*",
+          "Period": "1s",
+          "Limit": 5
+        }
+      ],
+      "ipWhitelist": [
+        ""
+      ]
+    }
+  },
+  "pools": [
+    {
+      "id": "btc",
+      "enabled": true,
+      "coin": "bitcoin",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6004": {
+          "name": "General ASIC (1TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6204": {
+          "name": "Adequate ASIC (120TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6304": {
+          "name": "Rich Boi ASIC (250TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6404": {
+          "name": "NerdMiner",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 0.001,
+          "varDiff": {
+            "minDiff": 1e-06,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9004,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7004"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "btcs",
+      "enabled": true,
+      "coin": "bitcoin-silver",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6015": {
+          "name": "General ASIC (1TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6215": {
+          "name": "Adequate ASIC (120TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6315": {
+          "name": "Rich Boi ASIC (250TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6415": {
+          "name": "NerdMiner",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 0.001,
+          "varDiff": {
+            "minDiff": 1e-06,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9015,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7015"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "bch",
+      "enabled": true,
+      "coin": "bitcoin-cash",
+      "address": "xxx",
+      "addressType": "bcash",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6002": {
+          "name": "General ASIC (1TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6202": {
+          "name": "Adequate ASIC (120TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6302": {
+          "name": "Rich Boi ASIC (250TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6402": {
+          "name": "NerdMiner",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 0.001,
+          "varDiff": {
+            "minDiff": 1e-06,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9002,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7002"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "bc2",
+      "enabled": true,
+      "coin": "bitcoin-ii",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6006": {
+          "name": "General ASIC (1TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6206": {
+          "name": "Adequate ASIC (120TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6306": {
+          "name": "Rich Boi ASIC (250TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6406": {
+          "name": "NerdMiner",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 0.001,
+          "varDiff": {
+            "minDiff": 1e-06,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9006,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7006"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "bsv",
+      "enabled": false,
+      "coin": "bitcoin-sv",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6005": {
+          "name": "General ASIC (1TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6205": {
+          "name": "Adequate ASIC (120TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6305": {
+          "name": "Rich Boi ASIC (250TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6405": {
+          "name": "NerdMiner",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 0.001,
+          "varDiff": {
+            "minDiff": 1e-06,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9005,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7005"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "doge",
+      "enabled": true,
+      "coin": "dogecoin",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6003": {
+          "name": "General ASIC",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9003,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7003"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "dgb",
+      "enabled": true,
+      "coin": "digibyte-sha256",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6001": {
+          "name": "General ASIC (1TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6201": {
+          "name": "Adequate ASIC (120TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6301": {
+          "name": "Rich Boi ASIC (250TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6401": {
+          "name": "NerdMiner",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 0.001,
+          "varDiff": {
+            "minDiff": 1e-06,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9001,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7001"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "xec",
+      "enabled": false,
+      "coin": "ecash",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6007": {
+          "name": "General ASIC (1TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6207": {
+          "name": "Adequate ASIC (120TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6307": {
+          "name": "Rich Boi ASIC (250TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6407": {
+          "name": "NerdMiner",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 0.001,
+          "varDiff": {
+            "minDiff": 1e-06,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9007,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7007"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "grs",
+      "enabled": true,
+      "coin": "groestlcoin",
+      "address": "xxx",
+      "addressType": "bechSegwit",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "bechPrefix": "grs",
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6013": {
+          "name": "General ASIC",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9013,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7013"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "lcc",
+      "enabled": true,
+      "coin": "litecoin-cash",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6018": {
+          "name": "General ASIC (1TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6218": {
+          "name": "Adequate ASIC (120TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6318": {
+          "name": "Rich Boi ASIC (250TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6418": {
+          "name": "NerdMiner",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 0.001,
+          "varDiff": {
+            "minDiff": 1e-06,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9018,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7018"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "lcc2",
+      "enabled": true,
+      "coin": "litecoin-cash-minotaurx",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6019": {
+          "name": "General CPU",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1,
+          "varDiff": {
+            "minDiff": 0.001,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9019,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7019"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "xmr",
+      "enabled": false,
+      "coin": "monero",
+      "randomXRealm": "xmr",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "blockRefreshInterval": 500,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6009": {
+          "listenAddress": "0.0.0.0",
+          "difficulty": 7500,
+          "name": "General CPU",
+          "varDiff": {
+            "minDiff": 1000,
+            "maxDiff": null,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9009,
+          "user": "pooluser",
+          "password": "poolpassword"
+        },
+        {
+          "host": "__SERVER_HOST__",
+          "port": 18082,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "category": "wallet"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.25,
+        "minimumPaymentToPaymentId": 1.0,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2.0
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "xna",
+      "enabled": true,
+      "coin": "neurai",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": false,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6011": {
+          "name": "General GPU",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1,
+          "varDiff": {
+            "minDiff": 0.001,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9011,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7011"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "ppc",
+      "enabled": true,
+      "coin": "peercoin",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6012": {
+          "name": "General ASIC (1TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6212": {
+          "name": "Adequate ASIC (120TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6312": {
+          "name": "Rich Boi ASIC (250TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6412": {
+          "name": "NerdMiner",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 0.001,
+          "varDiff": {
+            "minDiff": 1e-06,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9012,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7012"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "pepew",
+      "enabled": false,
+      "coin": "pepepow",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6014": {
+          "name": "General CPU",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1,
+          "varDiff": {
+            "minDiff": 0.001,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9014,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7014"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "rvn",
+      "enabled": true,
+      "coin": "ravencoin",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6010": {
+          "name": "General GPU",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1,
+          "varDiff": {
+            "minDiff": 0.001,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9010,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7010"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "vtc",
+      "enabled": false,
+      "coin": "vertcoin",
+      "vertHashDataFile": "/.vertcoin/verthash.dat",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6008": {
+          "name": "General GPU",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1,
+          "varDiff": {
+            "minDiff": 0.001,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9008,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7008"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "wjk",
+      "enabled": true,
+      "coin": "wojakcoin",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6017": {
+          "name": "General ASIC (1TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6217": {
+          "name": "Adequate ASIC (120TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6317": {
+          "name": "Rich Boi ASIC (250TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        },
+        "6417": {
+          "name": "NerdMiner",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 0.001,
+          "varDiff": {
+            "minDiff": 1e-06,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9017,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7017"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "ltc",
+      "enabled": true,
+      "coin": "litecoin",
+      "address": "xxx",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6020": {
+          "name": "General ASIC",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9020,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7020"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "addressInfoLink": "https://blockchair.com/litecoin/address/ltc1qcf8mjgxte5eyx9rlyq9xdyz30xtm78zur53pck",
+      "poolFeePercent": 1.5
+    },
+    {
+      "id": "bch2",
+      "enabled": false,
+      "coin": "bitcoin-cash-ii",
+      "address": "xxx",
+      "addressType": "bcash",
+      "rewardRecipients": [
+        {
+          "address": "xxx",
+          "percentage": 1.5
+        }
+      ],
+      "enableAsicBoost": true,
+      "blockRefreshInterval": 0,
+      "jobRebroadcastTimeout": 10,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "6016": {
+          "name": "General ASIC (1TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          },
+          "tls": false,
+          "tlsAuto": false
+        },
+        "6216": {
+          "name": "Adequate ASIC (120TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          },
+          "tls": false,
+          "tlsAuto": false
+        },
+        "6316": {
+          "name": "Rich Boi ASIC (250TH)",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 1024,
+          "varDiff": {
+            "minDiff": 1,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          },
+          "tls": false,
+          "tlsAuto": false
+        },
+        "6416": {
+          "name": "NerdMiner",
+          "listenAddress": "0.0.0.0",
+          "difficulty": 0.001,
+          "varDiff": {
+            "minDiff": 1e-06,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          },
+          "tls": false,
+          "tlsAuto": false
+        }
+      },
+      "daemons": [
+        {
+          "host": "__SERVER_HOST__",
+          "port": 9016,
+          "user": "pooluser",
+          "password": "poolpassword",
+          "zmqBlockNotifySocket": "tcp://__SERVER_HOST__:7016"
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": true,
+        "minimumPayment": 0.001,
+        "payoutScheme": "SOLO",
+        "payoutSchemeConfig": {
+          "factor": 2
+        }
+      },
+      "poolFeePercent": 1.5
+    }
+  ]
+}

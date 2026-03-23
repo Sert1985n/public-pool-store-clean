@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Cryptocurrency Nodes",
+    "font": "currency-usd",
+    "description": "Cryptocurrency coin nodes and wallets"
+  },
+  {
+    "name": "Core Services",
+    "font": "database",
+    "description": "Miningcore, PostgreSQL and backend services"
+  },
+  {
+    "name": "Web UI",
+    "font": "monitor-dashboard",
+    "description": "Web interfaces and pool pages"
+  },
+  {
+    "name": "Templates",
+    "font": "file-document-outline",
+    "description": "Template apps for build-required nodes"
+  },
+  {
+    "name": "RetroMike",
+    "font": "toolbox-outline",
+    "description": "Retro Mike custom apps"
+  },
+  {
+    "name": "Utilities",
+    "font": "toolbox-outline",
+    "description": "Utilities and helper apps"
+  }
+]

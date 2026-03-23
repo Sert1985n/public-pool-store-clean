@@ -1,0 +1,1 @@
+Upload Apps/public-pool-webui-home-v2 and Apps/public-pool-webui-btc-v2 into repository Apps/, then refresh CasaOS source and install V2 apps. Remove old failed installs first.

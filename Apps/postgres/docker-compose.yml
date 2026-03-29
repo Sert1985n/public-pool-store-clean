@@ -29,6 +29,6 @@ x-casaos:
     en_us: PostgreSQL database service for Miningcore data, shares, payouts and statistics.
   developer: Retro Mike
   author: Retro Mike
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/postgres/icon.png
-  thumbnail: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/postgres/icon.png
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PostgreSQL/icon.png
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PostgreSQL/icon.png
   port_map: "5432"

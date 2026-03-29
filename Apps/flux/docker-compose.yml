@@ -1,0 +1,29 @@
+# TEMPLATE APP
+# Build/publish image first, then replace local/flux:latest if needed.
+name: retro-mike-flux
+services:
+  app:
+    container_name: flux
+    image: local/flux:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/flux:/root/.flux
+    ports:
+      - "9161:9161"
+      - "16125:16125"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Flux node template. Build/import image first.
+  tagline:
+    en_us: Build-required node template for FLUX.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/flux/icon.png
+  thumbnail: ""
+  title:
+    en_us: Flux (FLUX) Node Template
+  category: Templates
+  port_map: "9161"

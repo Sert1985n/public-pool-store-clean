@@ -1,0 +1,29 @@
+# TEMPLATE APP
+# Build/publish image first, then replace local/space:latest if needed.
+name: retro-mike-space
+services:
+  app:
+    container_name: space
+    image: local/space:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/space:/root/.space
+    ports:
+      - "9029:9029"
+      - "7029:7029"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Space node template. Build/import image first.
+  tagline:
+    en_us: Build-required node template for SPACE.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/space/icon.png
+  thumbnail: ""
+  title:
+    en_us: Space (SPACE) Node Template
+  category: Templates
+  port_map: "9029"

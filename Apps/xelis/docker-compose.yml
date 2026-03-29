@@ -1,0 +1,29 @@
+# TEMPLATE APP
+# Build/publish image first, then replace local/xelis:latest if needed.
+name: retro-mike-xelis
+services:
+  app:
+    container_name: xel
+    image: local/xelis:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/xel:/root/.xelis
+    ports:
+      - "9031:9031"
+      - "2125:2125"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Xelis node template. Build/import image first.
+  tagline:
+    en_us: Build-required node template for XEL.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/xelis/icon.png
+  thumbnail: ""
+  title:
+    en_us: Xelis (XEL) Node Template
+  category: Templates
+  port_map: "9031"

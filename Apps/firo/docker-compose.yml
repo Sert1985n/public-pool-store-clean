@@ -1,0 +1,29 @@
+# TEMPLATE APP
+# Build/publish image first, then replace local/firo:latest if needed.
+name: retro-mike-firo
+services:
+  app:
+    container_name: firo
+    image: local/firo:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/firo:/root/.firo
+    ports:
+      - "9888:9888"
+      - "8168:8168"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Firo node template. Build/import image first.
+  tagline:
+    en_us: Build-required node template for FIRO.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/firo/icon.png
+  thumbnail: ""
+  title:
+    en_us: Firo (FIRO) Node Template
+  category: Templates
+  port_map: "9888"

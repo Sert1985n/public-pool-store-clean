@@ -1,0 +1,43 @@
+# TEMPLATE APP
+# Build/publish image first, then replace local/fractal-fb-node:0.3.0 if needed.
+name: retro-mike-fractal-bitcoin
+services:
+  app:
+    container_name: fb
+    image: local/fractal-fb-node:0.3.0
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/fb:/data
+    ports:
+      - "7014:7014"
+      - "9021:9021"
+      - "8338:8337"
+    command:
+      - /usr/local/bin/bitcoind
+      - -datadir=/data
+      - -printtoconsole
+      - -server=1
+      - -txindex=1
+      - -rpcbind=0.0.0.0
+      - -rpcallowip=0.0.0.0/0
+      - -rpcport=9021
+      - -rpcuser=pooluser
+      - -rpcpassword=poolpassword
+      - -zmqpubhashblock=tcp://0.0.0.0:7014
+      - -port=8337
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Fractal Bitcoin node template. Import/build image first.
+  tagline:
+    en_us: Build-required node template for FB.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/fractal-bitcoin/icon.png
+  thumbnail: ""
+  title:
+    en_us: Fractal Bitcoin (FB) Node Template
+  category: Templates
+  port_map: "7014"

@@ -1,0 +1,29 @@
+# TEMPLATE APP
+# Build/publish image first, then replace local/nexa:latest if needed.
+name: retro-mike-nexa
+services:
+  app:
+    container_name: nexa
+    image: local/nexa:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/nexa:/root/.nexa
+    ports:
+      - "7228:7228"
+      - "7227:7227"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Nexa node template. Build/import image first.
+  tagline:
+    en_us: Build-required node template for NEXA.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/nexa/icon.png
+  thumbnail: ""
+  title:
+    en_us: Nexa (NEXA) Node Template
+  category: Templates
+  port_map: "7228"

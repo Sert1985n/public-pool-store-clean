@@ -1,0 +1,29 @@
+# TEMPLATE APP
+# Build/publish image first, then replace local/ergo:latest if needed.
+name: retro-mike-ergo
+services:
+  app:
+    container_name: erg
+    image: local/ergo:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/erg:/root/.ergo
+    ports:
+      - "9051:9051"
+      - "9030:9030"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Ergo node template. Build/import image first.
+  tagline:
+    en_us: Build-required node template for ERG.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/ergo/icon.png
+  thumbnail: ""
+  title:
+    en_us: Ergo (ERG) Node Template
+  category: Templates
+  port_map: "9051"

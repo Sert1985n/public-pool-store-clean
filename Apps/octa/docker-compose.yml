@@ -1,0 +1,29 @@
+# TEMPLATE APP
+# Build/publish image first, then replace local/octa:latest if needed.
+name: retro-mike-octa
+services:
+  app:
+    container_name: octa
+    image: local/octa:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/octa:/root/.octa
+    ports:
+      - "9034:9034"
+      - "7022:7022"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: OctaSpace node template. Build/import image first.
+  tagline:
+    en_us: Build-required node template for OCTA.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/octa/icon.png
+  thumbnail: ""
+  title:
+    en_us: OctaSpace (OCTA) Node Template
+  category: Templates
+  port_map: "9034"

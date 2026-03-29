@@ -1,0 +1,29 @@
+# TEMPLATE APP
+# Build/publish image first, then replace local/horizen:latest if needed.
+name: retro-mike-zencash
+services:
+  app:
+    container_name: zen
+    image: local/horizen:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/zen:/root/.zen
+    ports:
+      - "9037:9037"
+      - "8231:8231"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: Horizen node template. Build/import image first.
+  tagline:
+    en_us: Build-required node template for ZEN.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/zencash/icon.png
+  thumbnail: ""
+  title:
+    en_us: Horizen (ZEN) Node Template
+  category: Templates
+  port_map: "9037"

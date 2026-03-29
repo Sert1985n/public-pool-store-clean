@@ -1,0 +1,30 @@
+# TEMPLATE APP
+# Build/publish image first, then replace local/ethw:latest if needed.
+name: retro-mike-ethw
+services:
+  app:
+    container_name: ethw
+    image: local/ethw:latest
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/ethw:/root/.ethw
+    ports:
+      - "9033:9033"
+      - "8552:8552"
+      - "30304:30304"
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: ETHW node template. Build/import image first.
+  tagline:
+    en_us: Build-required node template for ETHW.
+  developer: Retro Mike
+  author: Retro Mike
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/ethw/icon.png
+  thumbnail: ""
+  title:
+    en_us: EthereumPoW (ETHW) Node Template
+  category: Templates
+  port_map: "9033"

@@ -1,0 +1,47 @@
+{
+  "home": "public-pool-panel-home",
+  "count": 35,
+  "parts": {
+    "part1": [
+      "public-pool-panel-home",
+      "public-pool-panel-auroracoin",
+      "public-pool-panel-bitcoin",
+      "public-pool-panel-bitcoin-cash",
+      "public-pool-panel-bitcoin-cash-ii",
+      "public-pool-panel-bitcoin-ii",
+      "public-pool-panel-bitcoin-silver",
+      "public-pool-panel-bitcoinoil",
+      "public-pool-panel-buck",
+      "public-pool-panel-digibyte",
+      "public-pool-panel-dogecoin",
+      "public-pool-panel-emark"
+    ],
+    "part2": [
+      "public-pool-panel-groestlcoin",
+      "public-pool-panel-hush",
+      "public-pool-panel-hypercoin",
+      "public-pool-panel-komodo",
+      "public-pool-panel-litecoin",
+      "public-pool-panel-litecoin-cash-minotaurx",
+      "public-pool-panel-litecoin-cash-sha256",
+      "public-pool-panel-marmara",
+      "public-pool-panel-monero",
+      "public-pool-panel-neurai",
+      "public-pool-panel-nito",
+      "public-pool-panel-ordexcoin"
+    ],
+    "part3": [
+      "public-pool-panel-peercoin",
+      "public-pool-panel-pepepow",
+      "public-pool-panel-pirate",
+      "public-pool-panel-ravencoin",
+      "public-pool-panel-rebelcoin",
+      "public-pool-panel-squishycoinqt",
+      "public-pool-panel-tokel",
+      "public-pool-panel-viceversachain",
+      "public-pool-panel-wojakcoin",
+      "public-pool-panel-zcash",
+      "public-pool-panel-zephyr"
+    ]
+  }
+}

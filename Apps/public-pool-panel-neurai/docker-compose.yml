@@ -1,0 +1,51 @@
+name: public-pool-panel-neurai
+services:
+  app:
+    image: python:3.12-alpine
+    container_name: public-pool-panel-neurai
+    restart: unless-stopped
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    ports:
+    - 8621:8621
+    environment:
+    - APP_MODE=coin
+    - PORT=8621
+    - APP_TITLE=NeurAI Pool Panel
+    - HOME_URL=http://host.docker.internal:8600
+    - COIN_ALGO=KawPow
+    - API_UPSTREAM=http://host.docker.internal:4000
+    command:
+    - /bin/sh
+    - -lc
+    - 'set -eu
+
+      apk add --no-cache wget tar
+
+      mkdir -p /srv/site /srv/app
+
+      wget -qO /tmp/site.tar.gz "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-neurai/site.tar.gz"
+
+      tar -xzf /tmp/site.tar.gz -C /srv/site
+
+      wget -qO /srv/app/server.py "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-neurai/server.py"
+
+      SITE_ROOT=/srv/site python3 /srv/app/server.py'
+x-casaos:
+  architectures:
+  - amd64
+  - arm64
+  main: app
+  store_app_id: public-pool-panel-neurai
+  category: Web UI
+  title:
+    en_us: Public Pool Panel XNA
+  tagline:
+    en_us: NeurAI panel
+  description:
+    en_us: CasaOS pool panel for NeurAI, based on uploaded Molepool files.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-neurai/icon.png
+  thumbnail: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-neurai/icon.png
+  port_map: '8621'

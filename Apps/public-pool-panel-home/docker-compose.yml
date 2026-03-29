@@ -1,0 +1,191 @@
+name: public-pool-panel-home
+services:
+  app:
+    image: python:3.12-alpine
+    container_name: public-pool-panel-home
+    restart: unless-stopped
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    ports:
+    - 8600:8600
+    environment:
+    - APP_MODE=home
+    - PORT=8600
+    - APP_TITLE=Public Pool Panel
+    - HOME_URL=/
+    - COINS_JSON=[{"symbol":"AUR","name":"Auroracoin","algo":"Scrypt"},{"symbol":"BTC","name":"Bitcoin","algo":"SHA-256"},{"symbol":"BCH","name":"Bitcoin
+      Cash","algo":"SHA-256"},{"symbol":"BCH2","name":"Bitcoin Cash II","algo":"SHA-256"},{"symbol":"BC2","name":"BitcoinII","algo":"SHA-256"},{"symbol":"BTCS","name":"Bitcoin
+      Silver","algo":"Scrypt"},{"symbol":"OIL","name":"Bitcoin Oil","algo":"SHA-256"},{"symbol":"BUCK","name":"Buck","algo":"Scrypt"},{"symbol":"DGB","name":"Digibyte","algo":"Scrypt"},{"symbol":"DOGE","name":"Dogecoin","algo":"Scrypt"},{"symbol":"DEM","name":"Deutsche
+      eMark","algo":"Scrypt"},{"symbol":"GRS","name":"Groestlcoin","algo":"Groestl"},{"symbol":"HUSH","name":"Hush","algo":"Equihash"},{"symbol":"HYPER","name":"Hypercoin","algo":"Scrypt"},{"symbol":"KMD","name":"Komodo","algo":"Equihash"},{"symbol":"LTC","name":"Litecoin","algo":"Scrypt"},{"symbol":"LCC-MTX","name":"Litecoin
+      Cash MinotaurX","algo":"MinotaurX"},{"symbol":"LCC-SHA","name":"Litecoin Cash
+      SHA256","algo":"SHA-256"},{"symbol":"MARMARA","name":"Marmara","algo":"Equihash"},{"symbol":"XMR","name":"Monero","algo":"RandomX"},{"symbol":"XNA","name":"NeurAI","algo":"KawPow"},{"symbol":"NITO","name":"Nito","algo":"GhostRider"},{"symbol":"ORDEX","name":"OrdexCoin","algo":"SHA-256"},{"symbol":"PPC","name":"Peercoin","algo":"SHA-256"},{"symbol":"PEPEW","name":"PepePOW","algo":"ProgPow"},{"symbol":"ARRR","name":"Pirate","algo":"Equihash"},{"symbol":"RVN","name":"Ravencoin","algo":"KawPow"},{"symbol":"RBL","name":"RebelCoin","algo":"Scrypt"},{"symbol":"SQUISHY","name":"SquishyCoinQT","algo":"Scrypt"},{"symbol":"TKL","name":"Tokel","algo":"Equihash"},{"symbol":"VICE","name":"ViceversaChain","algo":"Scrypt"},{"symbol":"WJK","name":"Wojakcoin","algo":"Scrypt"},{"symbol":"ZEC","name":"Zcash","algo":"Equihash"},{"symbol":"ZEPH","name":"Zephyr","algo":"RandomX"}]
+    - PANEL_AUR=http://host.docker.internal:8601
+    - ICON_AUR=/srv/icons/auroracoin.png
+    - PANEL_BTC=http://host.docker.internal:8602
+    - ICON_BTC=/srv/icons/bitcoin.png
+    - PANEL_BCH=http://host.docker.internal:8603
+    - ICON_BCH=/srv/icons/bitcoin-cash.png
+    - PANEL_BCH2=http://host.docker.internal:8604
+    - ICON_BCH2=/srv/icons/bitcoin-cash-ii.png
+    - PANEL_BC2=http://host.docker.internal:8605
+    - ICON_BC2=/srv/icons/bitcoin-ii.png
+    - PANEL_BTCS=http://host.docker.internal:8606
+    - ICON_BTCS=/srv/icons/bitcoin-silver.png
+    - PANEL_OIL=http://host.docker.internal:8607
+    - ICON_OIL=/srv/icons/bitcoinoil.png
+    - PANEL_BUCK=http://host.docker.internal:8608
+    - ICON_BUCK=/srv/icons/buck.png
+    - PANEL_DGB=http://host.docker.internal:8609
+    - ICON_DGB=/srv/icons/digibyte.png
+    - PANEL_DOGE=http://host.docker.internal:8610
+    - ICON_DOGE=/srv/icons/dogecoin.png
+    - PANEL_DEM=http://host.docker.internal:8611
+    - ICON_DEM=/srv/icons/emark.png
+    - PANEL_GRS=http://host.docker.internal:8612
+    - ICON_GRS=/srv/icons/groestlcoin.png
+    - PANEL_HUSH=http://host.docker.internal:8613
+    - ICON_HUSH=/srv/icons/hush.png
+    - PANEL_HYPER=http://host.docker.internal:8614
+    - ICON_HYPER=/srv/icons/hypercoin.png
+    - PANEL_KMD=http://host.docker.internal:8615
+    - ICON_KMD=/srv/icons/komodo.png
+    - PANEL_LTC=http://host.docker.internal:8616
+    - ICON_LTC=/srv/icons/litecoin.png
+    - PANEL_LCC-MTX=http://host.docker.internal:8617
+    - ICON_LCC-MTX=/srv/icons/litecoin-cash-minotaurx.png
+    - PANEL_LCC-SHA=http://host.docker.internal:8618
+    - ICON_LCC-SHA=/srv/icons/litecoin-cash-sha256.png
+    - PANEL_MARMARA=http://host.docker.internal:8619
+    - ICON_MARMARA=/srv/icons/marmara.png
+    - PANEL_XMR=http://host.docker.internal:8620
+    - ICON_XMR=/srv/icons/monero.png
+    - PANEL_XNA=http://host.docker.internal:8621
+    - ICON_XNA=/srv/icons/neurai.png
+    - PANEL_NITO=http://host.docker.internal:8622
+    - ICON_NITO=/srv/icons/nito.png
+    - PANEL_ORDEX=http://host.docker.internal:8623
+    - ICON_ORDEX=/srv/icons/ordexcoin.png
+    - PANEL_PPC=http://host.docker.internal:8624
+    - ICON_PPC=/srv/icons/peercoin.png
+    - PANEL_PEPEW=http://host.docker.internal:8625
+    - ICON_PEPEW=/srv/icons/pepepow.png
+    - PANEL_ARRR=http://host.docker.internal:8626
+    - ICON_ARRR=/srv/icons/pirate.png
+    - PANEL_RVN=http://host.docker.internal:8627
+    - ICON_RVN=/srv/icons/ravencoin.png
+    - PANEL_RBL=http://host.docker.internal:8628
+    - ICON_RBL=/srv/icons/rebelcoin.png
+    - PANEL_SQUISHY=http://host.docker.internal:8629
+    - ICON_SQUISHY=/srv/icons/squishycoinqt.png
+    - PANEL_TKL=http://host.docker.internal:8630
+    - ICON_TKL=/srv/icons/tokel.png
+    - PANEL_VICE=http://host.docker.internal:8631
+    - ICON_VICE=/srv/icons/viceversachain.png
+    - PANEL_WJK=http://host.docker.internal:8632
+    - ICON_WJK=/srv/icons/wojakcoin.png
+    - PANEL_ZEC=http://host.docker.internal:8633
+    - ICON_ZEC=/srv/icons/zcash.png
+    - PANEL_ZEPH=http://host.docker.internal:8634
+    - ICON_ZEPH=/srv/icons/zephyr.png
+    command:
+    - /bin/sh
+    - -lc
+    - 'set -eu
+
+      apk add --no-cache wget tar
+
+      mkdir -p /srv/site /srv/app /srv/icons
+
+      wget -qO /tmp/site.tar.gz "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-home/site.tar.gz"
+
+      tar -xzf /tmp/site.tar.gz -C /srv/site
+
+      wget -qO /srv/app/server.py "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-home/server.py"
+
+      wget -qO /srv/icons/auroracoin.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-auroracoin/icon.png"
+
+      wget -qO /srv/icons/bitcoin.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-bitcoin/icon.png"
+
+      wget -qO /srv/icons/bitcoin-cash.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-bitcoin-cash/icon.png"
+
+      wget -qO /srv/icons/bitcoin-cash-ii.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-bitcoin-cash-ii/icon.png"
+
+      wget -qO /srv/icons/bitcoin-ii.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-bitcoin-ii/icon.png"
+
+      wget -qO /srv/icons/bitcoin-silver.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-bitcoin-silver/icon.png"
+
+      wget -qO /srv/icons/bitcoinoil.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-bitcoinoil/icon.png"
+
+      wget -qO /srv/icons/buck.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-buck/icon.png"
+
+      wget -qO /srv/icons/digibyte.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-digibyte/icon.png"
+
+      wget -qO /srv/icons/dogecoin.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-dogecoin/icon.png"
+
+      wget -qO /srv/icons/emark.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-emark/icon.png"
+
+      wget -qO /srv/icons/groestlcoin.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-groestlcoin/icon.png"
+
+      wget -qO /srv/icons/hush.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-hush/icon.png"
+
+      wget -qO /srv/icons/hypercoin.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-hypercoin/icon.png"
+
+      wget -qO /srv/icons/komodo.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-komodo/icon.png"
+
+      wget -qO /srv/icons/litecoin.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-litecoin/icon.png"
+
+      wget -qO /srv/icons/litecoin-cash-minotaurx.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-litecoin-cash-minotaurx/icon.png"
+
+      wget -qO /srv/icons/litecoin-cash-sha256.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-litecoin-cash-sha256/icon.png"
+
+      wget -qO /srv/icons/marmara.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-marmara/icon.png"
+
+      wget -qO /srv/icons/monero.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-monero/icon.png"
+
+      wget -qO /srv/icons/neurai.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-neurai/icon.png"
+
+      wget -qO /srv/icons/nito.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-nito/icon.png"
+
+      wget -qO /srv/icons/ordexcoin.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-ordexcoin/icon.png"
+
+      wget -qO /srv/icons/peercoin.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-peercoin/icon.png"
+
+      wget -qO /srv/icons/pepepow.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-pepepow/icon.png"
+
+      wget -qO /srv/icons/pirate.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-pirate/icon.png"
+
+      wget -qO /srv/icons/ravencoin.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-ravencoin/icon.png"
+
+      wget -qO /srv/icons/rebelcoin.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-rebelcoin/icon.png"
+
+      wget -qO /srv/icons/squishycoinqt.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-squishycoinqt/icon.png"
+
+      wget -qO /srv/icons/tokel.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-tokel/icon.png"
+
+      wget -qO /srv/icons/viceversachain.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-viceversachain/icon.png"
+
+      wget -qO /srv/icons/wojakcoin.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-wojakcoin/icon.png"
+
+      wget -qO /srv/icons/zcash.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-zcash/icon.png"
+
+      wget -qO /srv/icons/zephyr.png "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-zephyr/icon.png"
+
+      SITE_ROOT=/srv/site python3 /srv/app/server.py'
+x-casaos:
+  architectures:
+  - amd64
+  - arm64
+  main: app
+  store_app_id: public-pool-panel-home
+  category: Web UI
+  title:
+    en_us: Public Pool Panel Home
+  tagline:
+    en_us: Central panel for all pool coins
+  description:
+    en_us: Central Molepool-style panel for all coins in the repository.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-home/icon.png
+  thumbnail: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-panel-home/icon.png
+  port_map: '8600'

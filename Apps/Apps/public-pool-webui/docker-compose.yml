@@ -1,0 +1,55 @@
+name: public-pool-webui
+services:
+  app:
+    image: mcr.microsoft.com/dotnet/aspnet:8.0
+    container_name: public-pool-webui
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "81:8080"
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - API_BASE_URL=http://host.docker.internal:4000/api
+      - MININGCORE_HOST=host.docker.internal
+      - PLATFORM=ZIMAOS
+      - POOL_NAME=public-pool-btc.ru
+      - POSTGRES_DATABASE=miningcore
+      - POSTGRES_HOST=host.docker.internal
+      - POSTGRES_PASSWORD=miningcore
+      - POSTGRES_USER=miningcore
+      - PUID=1000
+      - STRATUM_HOST=public-pool-btc.ru
+    volumes:
+      - /media/ZimaOS-HD/miningcore:/srv/public-pool/app/miningcore
+    command:
+      - /bin/sh
+      - -lc
+      - |
+          set -eu
+          apt-get update
+          apt-get install -y --no-install-recommends ca-certificates wget tar
+          rm -rf /var/lib/apt/lists/*
+          mkdir -p /srv/public-pool/app
+          wget -qO /tmp/app.tar.gz "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-webui/app.tar.gz"
+          tar -xzf /tmp/app.tar.gz -C /srv/public-pool/app
+          cd /srv/public-pool/app
+          exec dotnet MiningCoreWebUI.dll
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: app
+  store_app_id: public-pool-webui
+  category: Web UI
+  title:
+    en_us: "Public Pool Web UI"
+  tagline:
+    en_us: "Custom Miningcore Web UI"
+  description:
+    en_us: "public-pool-btc.ru custom Miningcore Web UI with one-click install and round coin icons."
+  developer: "public-pool-btc.ru"
+  author: "public-pool-btc.ru"
+  icon: "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-webui/icon.png"
+  thumbnail: "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-webui/icon.png"
+  port_map: "81"

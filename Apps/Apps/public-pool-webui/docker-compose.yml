@@ -50,6 +50,6 @@ x-casaos:
     en_us: "public-pool-btc.ru custom Miningcore Web UI with one-click install and round coin icons."
   developer: "public-pool-btc.ru"
   author: "public-pool-btc.ru"
-  icon: "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-webui/icon.png"
-  thumbnail: "https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-webui/icon.png"
+  icon: "https://raw.githubusercontent.com/TheRetroMike/retromike-umbrel-app-store/master/retro-mike-miningcore-webui/webui.png"
+  thumbnail: "https://raw.githubusercontent.com/TheRetroMike/retromike-umbrel-app-store/master/retro-mike-miningcore-webui/webui.png"
   port_map: "81"

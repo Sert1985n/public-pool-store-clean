@@ -13,3 +13,5 @@ Files:
 - app.tar.gz       custom live /app
 - docker-compose.yml
 - icon.png
+
+Patched to hide Support Me and Pool Configuration, and replace footer.

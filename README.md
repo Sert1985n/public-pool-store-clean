@@ -17,9 +17,7 @@ https://github.com/Sert1985n/public-pool-store-clean/archive/refs/heads/main.zip
 - `Miningcore Web UI`
 - `PostgreSQL`
 - шаблоны и примеры конфигов
-- отдельные installable WEB UI app-пакеты:
-  - `public-pool-webui-home` (8500)
-  - `public-pool-webui-btc` (8501)
+
 
 ## Важные заметки
 

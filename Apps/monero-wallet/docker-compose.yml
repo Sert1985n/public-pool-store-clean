@@ -1,32 +1,37 @@
 name: monerowallet
 services:
   app:
-    container_name: xmr_wallet
+    container_name: app-monero-wallet
     image: theretromike/nodes:monero
     restart: always
     volumes:
-      - /media/ZimaOS-HD/NodeData/xmrwallet:/root/.bitmonero
+      - /media/ZimaOS-HD/NodeData/app-monero-wallet:/wallet
     ports:
-      - "18082:18082"
+      - "18182:18082"
     command:
-      - /usr/local/bin/monero-wallet-rpc
-      - --wallet-file=/root/.bitmonero/default
-      - --password=poolpassword
-      - --daemon-address=192.168.0.175:9009
-      - --daemon-login=pooluser:poolpassword
-      - --rpc-bind-port=18082
-      - --rpc-bind-ip=0.0.0.0
-      - --confirm-external-bind
-      - --disable-rpc-login
-      - --log-level=1
+      - /bin/sh
+      - -lc
+      - >
+        exec monero-wallet-rpc
+        --wallet-file /wallet/pool
+        --password poolwalletpass
+        --daemon-address 192.168.0.175:9109
+        --daemon-ssl disabled
+        --rpc-bind-ip 0.0.0.0
+        --rpc-bind-port 18082
+        --rpc-ssl disabled
+        --confirm-external-bind
+        --disable-rpc-login
+        --trusted-daemon
+        --log-level 1
 x-casaos:
   architectures:
     - amd64
   main: app
   description:
-    en_us: Monero Cryptocurrency Wallet
+    en_us: Monero Cryptocurrency Wallet RPC
   tagline:
-    en_us: Monero Cryptocurrency Wallet
+    en_us: Monero Cryptocurrency Wallet RPC
   developer: Retro Mike
   author: Retro Mike
   icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/monero-wallet/icon.png
@@ -34,4 +39,4 @@ x-casaos:
   title:
     en_us: Monero (XMR) Wallet
   category: RetroMike
-  port_map: "8888"
+  port_map: "18182"

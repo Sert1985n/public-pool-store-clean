@@ -36,11 +36,11 @@ x-casaos:
     - amd64
   main: app
   description:
-    en_us: eCash cryptocurrency node. Prepared for CasaOS App Store.
+    en_us: eCash Cryptocurrency Node. Can be used with Miningcore Apps to solo mine.
   tagline:
-    en_us: eCash (XEC) Node.
-  developer: public-pool-btc.ru
-  author: public-pool-btc.ru
+    en_us: eCash Cryptocurrency Node.
+  developer: Retro Mike
+  author: Retro Mike
   icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/ecash/icon.png
   thumbnail: ""
   title:

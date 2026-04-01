@@ -35,7 +35,7 @@ x-casaos:
     - amd64
   main: app
   description:
-    en_us: Bitcoin Cash II cryptocurrency node. Prepared for CasaOS App Store.
+    en_us: Bitcoin Cash II cryptocurrency node.
   tagline:
     en_us: Bitcoin Cash II (BCH2) Node.
   developer: public-pool-btc.ru

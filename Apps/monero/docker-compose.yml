@@ -1,4 +1,4 @@
-name: retro-mike-monero
+name: monero
 services:
   app:
     container_name: app-monero
@@ -9,29 +9,26 @@ services:
     ports:
       - "7109:7009"
       - "9109:9009"
-    entrypoint: /bin/sh
-    command: >
-      -lc '
-      exec /usr/local/bin/monerod
-      --non-interactive
-      --confirm-external-bind
-      --out-peers=32
-      --p2p-bind-ip=0.0.0.0
-      --p2p-bind-port=18080
-      --rpc-bind-ip=0.0.0.0
-      --rpc-bind-port=9009
-      --prune-blockchain
-      '
+    command:
+      - /usr/local/bin/monerod
+      - --non-interactive
+      - --confirm-external-bind
+      - --out-peers=32
+      - --p2p-bind-ip=0.0.0.0
+      - --p2p-bind-port=18080
+      - --rpc-bind-ip=0.0.0.0
+      - --rpc-bind-port=9009
+      - --prune-blockchain
 x-casaos:
   architectures:
     - amd64
   main: app
   description:
-    en_us: Monero cryptocurrency node. Prepared for CasaOS App Store.
+    en_us: Monero Cryptocurrency Node.
   tagline:
-    en_us: Monero (XMR) Node.
-  developer: public-pool-btc.ru
-  author: public-pool-btc.ru
+    en_us: Monero Cryptocurrency Node
+  developer: Retro Mike
+  author: Retro Mike
   icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/monero/icon.png
   thumbnail: ""
   title:

@@ -35,7 +35,7 @@ x-casaos:
     - amd64
   main: app
   description:
-    en_us: Bitcoin SV cryptocurrency node. Prepared for CasaOS App Store.
+    en_us: Bitcoin SV cryptocurrency node.
   tagline:
     en_us: Bitcoin SV (BSV) Node.
   developer: public-pool-btc.ru

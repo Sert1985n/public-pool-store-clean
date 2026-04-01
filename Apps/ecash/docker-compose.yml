@@ -1,0 +1,49 @@
+name: retro-mike-ecash
+services:
+  app:
+    container_name: app-ecash
+    image: theretromike/nodes:ecash
+    restart: always
+    volumes:
+      - /media/ZimaOS-HD/NodeData/app-ecash:/data
+    ports:
+      - "7107:7007"
+      - "9107:9007"
+    entrypoint: /bin/sh
+    command: >
+      -lc '
+      set -e;
+      BIN="";
+      for x in /usr/bin/bitcoind /usr/local/bin/bitcoind /usr/bin/bitcoin-abc /usr/local/bin/bitcoin-abc; do
+        [ -x "$x" ] && BIN="$x" && break;
+      done;
+      [ -n "$BIN" ] || { echo "XEC daemon not found"; exit 1; };
+      exec "$BIN"
+      -datadir=/data
+      -printtoconsole
+      -server=1
+      -prune=550
+      -rpcbind=0.0.0.0
+      -rpcallowip=0.0.0.0/0
+      -rpcport=9007
+      -rpcuser=pooluser
+      -rpcpassword=poolpassword
+      -zmqpubhashblock=tcp://0.0.0.0:7007
+      -usecashaddr=0
+      '
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  description:
+    en_us: eCash cryptocurrency node. Prepared for CasaOS App Store.
+  tagline:
+    en_us: eCash (XEC) Node.
+  developer: public-pool-btc.ru
+  author: public-pool-btc.ru
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/ecash/icon.png
+  thumbnail: ""
+  title:
+    en_us: eCash (XEC) Node
+  category: RetroMike
+  port_map: "9107"

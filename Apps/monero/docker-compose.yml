@@ -1,37 +1,40 @@
-name: monero
+name: retro-mike-monero
 services:
   app:
-    container_name: xmr
+    container_name: app-monero
     image: theretromike/nodes:monero
     restart: always
     volumes:
-      - /media/ZimaOS-HD/NodeData/xmr:/root/.bitmonero
+      - /media/ZimaOS-HD/NodeData/app-monero:/root/.bitmonero
     ports:
-      - "9009:9009"
-      - "7009:7009"
-    command:
-      - /usr/local/bin/monerod
-      - --non-interactive
-      - --confirm-external-bind
-      - --out-peers=32
-      - --p2p-bind-ip=0.0.0.0
-      - --p2p-bind-port=18080
-      - --rpc-bind-ip=0.0.0.0
-      - --rpc-bind-port=9009
-      - --prune-blockchain
+      - "7109:7009"
+      - "9109:9009"
+    entrypoint: /bin/sh
+    command: >
+      -lc '
+      exec /usr/local/bin/monerod
+      --non-interactive
+      --confirm-external-bind
+      --out-peers=32
+      --p2p-bind-ip=0.0.0.0
+      --p2p-bind-port=18080
+      --rpc-bind-ip=0.0.0.0
+      --rpc-bind-port=9009
+      --prune-blockchain
+      '
 x-casaos:
   architectures:
     - amd64
   main: app
   description:
-    en_us: Monero Cryptocurrency Node.
+    en_us: Monero cryptocurrency node. Prepared for CasaOS App Store.
   tagline:
-    en_us: Monero Cryptocurrency Node
-  developer: Retro Mike
-  author: Retro Mike
+    en_us: Monero (XMR) Node.
+  developer: public-pool-btc.ru
+  author: public-pool-btc.ru
   icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/monero/icon.png
   thumbnail: ""
   title:
     en_us: Monero (XMR) Node
   category: RetroMike
-  port_map: "8888"
+  port_map: "9109"

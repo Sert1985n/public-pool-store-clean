@@ -1,14 +1,14 @@
-name: retro-mike-bitcoin-cash-ii
+name: retro-mike-bitcoin-sv
 services:
   app:
-    container_name: app-bitcoin-cash-ii
-    image: theretromike/nodes:bitcoincashii
+    container_name: app-bitcoin-sv
+    image: theretromike/nodes:bitcoinsv
     restart: always
     volumes:
-      - /media/ZimaOS-HD/NodeData/app-bitcoin-cash-ii:/data
+      - /media/ZimaOS-HD/NodeData/app-bitcoin-sv:/data
     ports:
-      - "7116:7016"
-      - "9116:9016"
+      - "7105:7005"
+      - "9105:9005"
     entrypoint: /bin/sh
     command: >
       -lc '
@@ -17,7 +17,7 @@ services:
       for x in /usr/bin/bitcoind /usr/local/bin/bitcoind; do
         [ -x "$x" ] && BIN="$x" && break;
       done;
-      [ -n "$BIN" ] || { echo "BCH2 daemon not found"; exit 1; };
+      [ -n "$BIN" ] || { echo "BSV daemon not found"; exit 1; };
       exec "$BIN"
       -datadir=/data
       -printtoconsole
@@ -25,24 +25,24 @@ services:
       -prune=550
       -rpcbind=0.0.0.0
       -rpcallowip=0.0.0.0/0
-      -rpcport=9016
+      -rpcport=9005
       -rpcuser=pooluser
       -rpcpassword=poolpassword
-      -zmqpubhashblock=tcp://0.0.0.0:7016
+      -zmqpubhashblock=tcp://0.0.0.0:7005
       '
 x-casaos:
   architectures:
     - amd64
   main: app
   description:
-    en_us: Bitcoin Cash II cryptocurrency node. Prepared for CasaOS App Store.
+    en_us: Bitcoin SV cryptocurrency node. Prepared for CasaOS App Store.
   tagline:
-    en_us: Bitcoin Cash II (BCH2) Node.
+    en_us: Bitcoin SV (BSV) Node.
   developer: public-pool-btc.ru
   author: public-pool-btc.ru
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoin-cash-ii/icon.png
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoin-sv/icon.png
   thumbnail: ""
   title:
-    en_us: Bitcoin Cash II (BCH2) Node
+    en_us: Bitcoin SV (BSV) Node
   category: RetroMike
-  port_map: "9116"
+  port_map: "9105"

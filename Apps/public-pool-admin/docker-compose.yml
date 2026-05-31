@@ -41,7 +41,7 @@ x-casaos:
     - arm64
   main: app
   store_app_id: public-pool-admin
-  category: Public Pool Tools
+  category: Public Pool
   title:
     en_US: Public Pool Admin
   tagline:

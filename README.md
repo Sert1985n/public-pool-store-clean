@@ -1,8 +1,13 @@
 # Public Pool Pro — CasaOS App Store
 
-Чистый репозиторий CasaOS App Store для установки собственного multi-coin mining pool с Web UI панелью.
+Чистый репозиторий CasaOS App Store для собственного multi-coin mining pool с Web UI панелью и отдельными приложениями монет.
 
-Цель проекта — одна понятная установка в CasaOS: добавил ссылку на магазин, выбрал приложение **Public Pool Pro**, нажал **Install**, получил рабочий стек пула с Web UI, API, базой данных и конфигурациями монет.
+Идея простая: добавил ссылку магазина в CasaOS, увидел приложения, установил то, что нужно:
+
+```text
+Public Pool Pro        # основной стек пула: база, API, Web UI, pool core
+Coin Node Apps         # отдельные ноды монет, которые можно ставить по одной
+```
 
 ## Ссылка для добавления в CasaOS
 
@@ -18,11 +23,27 @@ App Store → Custom Install / More → Add Source
 https://github.com/Sert1985n/public-pool-store-clean/archive/refs/heads/main.zip
 ```
 
-После добавления в магазине должно появиться приложение **Public Pool Pro**.
+После добавления в магазине должны появиться:
 
-## Что должно устанавливаться
+```text
+Public Pool Pro
+Bitcoin Node
+Bitcoin Cash Node
+Litecoin Node
+Dogecoin Node
+Peercoin Node
+Monero Node
+Neurai Node
+другие монеты, которые добавлены в Apps/
+```
 
-Основное приложение должно поднимать полный стек пула:
+## Как должна работать установка
+
+Есть два типа приложений.
+
+### 1. Public Pool Pro
+
+Основное приложение пула:
 
 ```text
 Public Pool Pro
@@ -30,19 +51,133 @@ Public Pool Pro
 ├── Redis             # быстрые live-данные и кэш
 ├── Pool Core         # stratum / shares / blocks / payouts
 ├── Pool API          # единый API для Web UI
-├── Web UI            # главная страница, монеты, аккаунты, выплаты
-└── Coin Configs      # конфигурации монет и daemon RPC
+└── Web UI            # главная страница, монеты, аккаунты, выплаты
 ```
 
-Все данные в панели должны быть реальными. Нельзя использовать фейковые значения, заглушки, нули вместо статистики или чужие данные с других пулов.
+Это приложение должно открывать главную Web UI панель пула.
 
-## Web UI
+### 2. Coin Node Apps
 
-Панель должна быть современной, тёмной, быстрой и удобной для майнеров.
+Каждая монета может устанавливаться отдельно:
 
-### Главная страница
+```text
+Apps/bitcoin/
+├── docker-compose.yml
+└── icon.png
 
-На главной странице должен быть список всех монет:
+Apps/bitcoin-cash/
+├── docker-compose.yml
+└── icon.png
+
+Apps/litecoin/
+├── docker-compose.yml
+└── icon.png
+```
+
+Так можно поставить только нужные монеты, а не запускать всё сразу.
+
+## Что нельзя делать
+
+В репозитории не должно быть старого мусора:
+
+```text
+- временные README_UPLOAD / README_FIX файлы;
+- отчёты UPDATED_BY_CHATGPT;
+- старые инструкции установки панели;
+- архивы временных частей панели;
+- заглушки вместо настоящего API;
+- fake hashrate / fake reward / fake balance;
+- чужая статистика с других пулов;
+- жёсткие локальные пути без CasaOS-переменных;
+- пароли по умолчанию без возможности изменить;
+- приложения без нормального x-casaos metadata;
+- приложения без icon.png.
+```
+
+## Что должно остаться в чистом репозитории
+
+```text
+README.md
+category-list.json
+Apps/
+├── public-pool-pro/
+│   ├── docker-compose.yml
+│   └── icon.png
+├── bitcoin/
+│   ├── docker-compose.yml
+│   └── icon.png
+├── bitcoin-cash/
+│   ├── docker-compose.yml
+│   └── icon.png
+├── litecoin/
+│   ├── docker-compose.yml
+│   └── icon.png
+└── другие монеты...
+```
+
+## Требования к каждому приложению CasaOS
+
+Каждая папка в `Apps/` должна быть отдельным устанавливаемым приложением.
+
+Минимум:
+
+```text
+docker-compose.yml
+icon.png
+```
+
+Желательно:
+
+```text
+screenshot-1.png
+thumbnail.png
+```
+
+В `docker-compose.yml` обязательно должно быть:
+
+```text
+name
+services
+x-casaos
+```
+
+`x-casaos` должен содержать:
+
+```text
+architectures
+main
+title
+description
+tagline
+developer
+author
+category
+icon
+port_map, если есть Web UI
+```
+
+## Хранение данных
+
+Все данные должны храниться в CasaOS-директориях:
+
+```text
+/DATA/AppData/public-pool-pro/...
+/DATA/AppData/bitcoin/...
+/DATA/AppData/bitcoin-cash/...
+/DATA/AppData/litecoin/...
+```
+
+Не использовать старые жёсткие пути вида:
+
+```text
+/media/ZimaOS-HD/NodeData/...
+```
+
+Такие пути нужно заменить на нормальные CasaOS volume paths.
+
+## Web UI Public Pool Pro
+
+Главная страница должна показывать:
 
 ```text
 Coin
@@ -57,9 +192,7 @@ Blocks
 Quick buttons: Coin / Account / Help
 ```
 
-### Страница монеты
-
-Для каждой монеты должна быть отдельная страница:
+Страница монеты должна показывать:
 
 ```text
 Hashrate chart
@@ -75,9 +208,7 @@ Last block
 Daemon status
 ```
 
-### Account page
-
-Страница аккаунта должна иметь вкладки:
+Account page должна иметь:
 
 ```text
 Dashboard
@@ -85,7 +216,7 @@ Rewards
 Payouts
 ```
 
-Dashboard должен показывать:
+Dashboard:
 
 ```text
 Workers online/offline
@@ -101,28 +232,9 @@ Best share
 Last share
 ```
 
-Rewards должен показывать интервалы:
+## Источники данных
 
-```text
-Hour
-12 Hours
-24 Hours
-Week
-Month
-```
-
-Payouts должен показывать:
-
-```text
-Time
-Amount
-Transaction ID
-Status
-```
-
-## Требования к данным
-
-Панель должна брать статистику только из собственного стека:
+Панель должна брать данные только из собственного стека:
 
 ```text
 miners / workers       → Pool Core / database
@@ -136,95 +248,12 @@ network hashrate       → coin daemon RPC or calculated API
 price                  → market API only as price source
 ```
 
-Запрещено:
+## Цель
+
+Сделать нормальный CasaOS App Store:
 
 ```text
-- подставлять чужую статистику;
-- копировать данные с Molepool или других пулов;
-- показывать fake hashrate / fake reward / fake balance;
-- использовать Web UI с заглушками вместо настоящего API;
-- делать отдельные сломанные панели на каждую монету;
-- завязывать установку на ручные архивы и временные патчи.
+CasaOS → Add Source → Public Pool Pro + отдельные монеты → Install → работает
 ```
 
-## Правильная структура CasaOS App Store
-
-Репозиторий должен иметь такую структуру:
-
-```text
-Apps/
-└── public-pool-pro/
-    ├── docker-compose.yml
-    ├── icon.png
-    ├── screenshot-1.png
-    └── thumbnail.png
-```
-
-Главное приложение:
-
-```text
-Apps/public-pool-pro/docker-compose.yml
-```
-
-Именно оно должно быть основным приложением в CasaOS.
-
-## Порты
-
-Рекомендуемые порты по умолчанию:
-
-```text
-Web UI:        8095
-Pool API:      внутренний порт контейнерной сети
-PostgreSQL:    внутренний порт контейнерной сети
-Redis:         внутренний порт контейнерной сети
-Stratum:       отдельные порты по монетам
-```
-
-Web UI должен открываться из CasaOS по кнопке приложения.
-
-## Хранение данных
-
-Все важные данные должны храниться в постоянных директориях CasaOS:
-
-```text
-/DATA/AppData/public-pool-pro/postgres
-/DATA/AppData/public-pool-pro/redis
-/DATA/AppData/public-pool-pro/config
-/DATA/AppData/public-pool-pro/coins
-/DATA/AppData/public-pool-pro/logs
-```
-
-Удаление или обновление контейнеров не должно удалять базу, конфиги, блоки, выплаты и историю пула.
-
-## Принцип сборки
-
-Проект должен быть собран как чистая профессиональная сборка:
-
-```text
-1. одно основное приложение в CasaOS;
-2. нормальный docker-compose.yml;
-3. нормальный x-casaos metadata;
-4. реальные конфиги монет;
-5. собственный API;
-6. новая Web UI без старых заглушек;
-7. стабильный запуск после перезагрузки;
-8. понятные логи;
-9. безопасное хранение данных;
-10. обновление без потери данных.
-```
-
-## Статус
-
-Этот репозиторий предназначен для чистой сборки **Public Pool Pro**.
-
-Старые тестовые панели, временные заглушки, непонятные per-coin приложения и ручные патчи не должны использоваться как основа. Их нужно заменить одним нормальным CasaOS-приложением, которое устанавливает полноценный mining pool stack и открывает единую Web UI панель.
-
-## Назначение
-
-**Public Pool Pro** должен быть готовой self-hosted системой для своего mining pool:
-
-```text
-CasaOS App Store → Public Pool Pro → Install → Web UI → рабочий пул
-```
-
-Без ручного собирания сломанных частей, без фейковых данных и без старых временных решений.
+Без старого мусора, без фейковых данных, без временных панелей и без ручной сборки сломанных частей.

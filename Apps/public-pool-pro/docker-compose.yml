@@ -1,0 +1,56 @@
+name: public-pool-pro
+services:
+  web:
+    image: nginx:1.27-alpine
+    container_name: public-pool-pro-web
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/public-pool-pro/web:/usr/share/nginx/html:ro
+    ports:
+      - "8095:80"
+  admin:
+    image: filebrowser/filebrowser:v2.31.2
+    container_name: public-pool-pro-admin
+    restart: unless-stopped
+    user: "0:0"
+    volumes:
+      - /DATA/AppData/public-pool-pro/admin-db:/database
+      - /DATA/AppData/public-pool-pro:/srv/public-pool-pro
+      - /DATA/AppData:/srv/appdata
+    ports:
+      - "8096:80"
+  postgres:
+    image: postgres:17.4
+    container_name: public-pool-pro-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: miningcore
+      POSTGRES_USER: miningcore
+      POSTGRES_HOST_AUTH_METHOD: trust
+      TZ: ${TZ}
+    volumes:
+      - /DATA/AppData/public-pool-pro/postgres:/var/lib/postgresql/data
+  redis:
+    image: redis:7.4-alpine
+    container_name: public-pool-pro-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - /DATA/AppData/public-pool-pro/redis:/data
+x-casaos:
+  architectures:
+    - amd64
+  main: web
+  store_app_id: public-pool-pro
+  category: Public Pool Core
+  title:
+    en_US: Public Pool Pro
+  tagline:
+    en_US: Public Pool base stack.
+  description:
+    en_US: Base stack with Web UI, admin file panel, PostgreSQL and Redis.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-pro/icon.png
+  index: /
+  port_map: "8095"

@@ -1,13 +1,11 @@
-# TEMPLATE APP
-# Build/publish image first, then replace local/ethereum-classic:latest if needed.
-name: retro-mike-ethereum-classic
+name: public-pool-ethereum-classic
 services:
   app:
-    container_name: etc
+    container_name: public-pool-ethereum-classic
     image: local/ethereum-classic:latest
-    restart: always
+    restart: unless-stopped
     volumes:
-      - /media/ZimaOS-HD/NodeData/etc:/root/.ethereum-classic
+      - /DATA/AppData/public-pool-ethereum-classic/data:/root/.ethereum-classic
     ports:
       - "9032:9032"
       - "8551:8551"
@@ -16,15 +14,15 @@ x-casaos:
   architectures:
     - amd64
   main: app
-  description:
-    en_us: Ethereum Classic node template. Build/import image first.
-  tagline:
-    en_us: Build-required node template for ETC.
-  developer: Retro Mike
-  author: Retro Mike
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/ethereum-classic/icon.png
-  thumbnail: ""
+  store_app_id: public-pool-ethereum-classic
+  category: Public Pool
   title:
-    en_us: Ethereum Classic (ETC) Node Template
-  category: Templates
+    en_US: Ethereum Classic (ETC) Node
+  tagline:
+    en_US: Ethereum Classic node for Public Pool.
+  description:
+    en_US: Ethereum Classic node for Public Pool.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/ethereum-classic/icon.png
   port_map: "9032"

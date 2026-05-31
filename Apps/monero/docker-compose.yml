@@ -1,37 +1,27 @@
-name: monero
+name: public-pool-monero
 services:
   app:
-    container_name: app-monero
+    container_name: public-pool-monero
     image: theretromike/nodes:monero
-    restart: always
+    restart: unless-stopped
     volumes:
-      - /media/ZimaOS-HD/NodeData/app-monero:/root/.bitmonero
+      - /DATA/AppData/public-pool-monero/data:/root/.bitmonero
     ports:
       - "7109:7009"
       - "9109:9009"
-    command:
-      - /usr/local/bin/monerod
-      - --non-interactive
-      - --confirm-external-bind
-      - --out-peers=32
-      - --p2p-bind-ip=0.0.0.0
-      - --p2p-bind-port=18080
-      - --rpc-bind-ip=0.0.0.0
-      - --rpc-bind-port=9009
-      - --prune-blockchain
 x-casaos:
   architectures:
     - amd64
   main: app
-  description:
-    en_us: Monero Cryptocurrency Node.
-  tagline:
-    en_us: Monero Cryptocurrency Node
-  developer: Retro Mike
-  author: Retro Mike
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/monero/icon.png
-  thumbnail: ""
+  store_app_id: public-pool-monero
+  category: Public Pool Coins
   title:
-    en_us: Monero (XMR) Node
-  category: RetroMike
+    en_US: Monero (XMR) Node
+  tagline:
+    en_US: Monero node.
+  description:
+    en_US: Monero node for Public Pool.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/monero/icon.png
   port_map: "9109"

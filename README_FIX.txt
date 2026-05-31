@@ -1,1 +1,0 @@
-Загрузи ТОЛЬКО папки Apps/public-pool-webui-home и Apps/public-pool-webui-btc поверх репозитория.\nПосле этого в CasaOS удали неудачные установки и поставь заново.

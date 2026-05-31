@@ -40,7 +40,7 @@ x-casaos:
     - arm64
   main: app
   store_app_id: public-pool-postgres
-  category: Public Pool Core
+  category: Public Pool
   title:
     en_US: Public Pool PostgreSQL
   tagline:

@@ -10,13 +10,12 @@ services:
       - "7012:7012"
       - "9012:9012"
       - "9901:9901"
-    command: "/usr/bin/peercoind -printtoconsole -server -wallet=default -zmqpubhashblock=tcp://0.0.0.0:7012 -rpcbind=0.0.0.0 -rpcport=9012 -rpcallowip=0.0.0.0/0 -port=9901 -rpcuser=pooluser -rpcpassword=poolpassword"
 x-casaos:
   architectures:
     - amd64
   main: app
   store_app_id: public-pool-peercoin
-  category: Public Pool Coins
+  category: Public Pool
   title:
     en_US: Peercoin (PPC) Node
   tagline:

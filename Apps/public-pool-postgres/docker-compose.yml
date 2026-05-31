@@ -1,0 +1,53 @@
+name: public-pool-postgres
+
+services:
+  app:
+    image: postgres:17.4
+    container_name: public-pool-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-miningcore}
+      POSTGRES_USER: ${POSTGRES_USER:-miningcore}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-miningcore}
+      TZ: ${TZ}
+    volumes:
+      - /DATA/AppData/public-pool-postgres/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    x-casaos:
+      envs:
+        - container: POSTGRES_DB
+          description:
+            en_US: Miningcore database name.
+        - container: POSTGRES_USER
+          description:
+            en_US: Miningcore database user.
+        - container: POSTGRES_PASSWORD
+          description:
+            en_US: Miningcore database password.
+      volumes:
+        - container: /var/lib/postgresql/data
+          description:
+            en_US: PostgreSQL persistent database directory.
+      ports:
+        - container: "5432"
+          description:
+            en_US: PostgreSQL port.
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: app
+  store_app_id: public-pool-postgres
+  category: Public Pool Core
+  title:
+    en_US: Public Pool PostgreSQL
+  tagline:
+    en_US: Database for Public Pool.
+  description:
+    en_US: PostgreSQL database for Miningcore and Public Pool services.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-postgres/icon.png
+  port_map: "5432"

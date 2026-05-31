@@ -1,0 +1,59 @@
+name: public-pool-admin
+
+services:
+  app:
+    image: filebrowser/filebrowser:v2.31.2
+    container_name: public-pool-admin
+    restart: unless-stopped
+    user: "0:0"
+    volumes:
+      - /DATA/AppData/public-pool-admin/database:/database
+      - /DATA/AppData/public-pool-admin/config:/config
+      - /DATA/AppData/public-pool-core:/srv/public-pool-core
+      - /DATA/AppData:/srv/appdata
+    ports:
+      - "8096:80"
+    command:
+      - --address
+      - 0.0.0.0
+      - --port
+      - "80"
+      - --root
+      - /srv
+      - --database
+      - /database/filebrowser.db
+    x-casaos:
+      volumes:
+        - container: /srv/public-pool-core
+          description:
+            en_US: Public Pool Core configuration directory.
+        - container: /srv/appdata
+          description:
+            en_US: CasaOS application data directory for node and pool configuration.
+      ports:
+        - container: "80"
+          description:
+            en_US: Admin web interface.
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: app
+  store_app_id: public-pool-admin
+  category: Public Pool Tools
+  title:
+    en_US: Public Pool Admin
+  tagline:
+    en_US: Admin panel for pool configuration files.
+  description:
+    en_US: File-based admin panel for editing Public Pool configs, coin daemon settings and generated Miningcore files. Default File Browser login is admin/admin until changed by the user.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-admin/icon.png
+  index: /
+  port_map: "8096"
+  tips:
+    before_install:
+      en_US: |
+        Default login for File Browser is admin/admin. Change it immediately after first login.

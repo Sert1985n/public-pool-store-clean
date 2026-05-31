@@ -1,0 +1,39 @@
+name: public-pool-redis
+
+services:
+  app:
+    image: redis:7.4-alpine
+    container_name: public-pool-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - /DATA/AppData/public-pool-redis/data:/data
+    ports:
+      - "6379:6379"
+    x-casaos:
+      volumes:
+        - container: /data
+          description:
+            en_US: Redis persistent data directory.
+      ports:
+        - container: "6379"
+          description:
+            en_US: Redis port.
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: app
+  store_app_id: public-pool-redis
+  category: Public Pool Core
+  title:
+    en_US: Public Pool Redis
+  tagline:
+    en_US: Cache and live data service for Public Pool.
+  description:
+    en_US: Redis service for Public Pool live state, cache and queue data.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-redis/icon.png
+  port_map: "6379"

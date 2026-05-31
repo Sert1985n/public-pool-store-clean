@@ -25,7 +25,7 @@ x-casaos:
     - amd64
   main: app
   store_app_id: public-pool-bitcoin-cash-ii
-  category: Public Pool Coins
+  category: Public Pool
   title:
     en_US: Bitcoin Cash II (BCH2) Node
   tagline:

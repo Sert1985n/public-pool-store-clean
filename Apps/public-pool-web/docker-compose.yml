@@ -25,7 +25,7 @@ x-casaos:
     - arm64
   main: app
   store_app_id: public-pool-web
-  category: Public Pool Web
+  category: Public Pool
   title:
     en_US: Public Pool Web UI
   tagline:

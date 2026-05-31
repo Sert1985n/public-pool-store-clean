@@ -1,7 +1,7 @@
-name: public-pool-monero
+name: public-pool-xmr
 services:
   app:
-    container_name: public-pool-monero
+    container_name: public-pool-xmr
     image: theretromike/nodes:monero
     restart: unless-stopped
     volumes:
@@ -14,13 +14,13 @@ x-casaos:
     - amd64
   main: app
   store_app_id: public-pool-monero
-  category: Public Pool Coins
+  category: Public Pool
   title:
-    en_US: Monero (XMR) Node
+    en_US: XMR Node
   tagline:
-    en_US: Monero node.
+    en_US: XMR node.
   description:
-    en_US: Monero node for Public Pool.
+    en_US: XMR node.
   developer: Public Pool
   author: Public Pool
   icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/monero/icon.png

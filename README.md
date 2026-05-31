@@ -5,18 +5,12 @@
 ## Source URL для CasaOS
 
 ```text
-https://github.com/Sert1985n/public-pool/archive/refs/heads/main.zip
-```
-
-До переименования репозитория временная ссылка:
-
-```text
 https://github.com/Sert1985n/public-pool-store-clean/archive/refs/heads/main.zip
 ```
 
 ## Категория CasaOS
 
-Все приложения должны быть в одной категории:
+Все приложения находятся в одной категории:
 
 ```text
 Public Pool

@@ -26,7 +26,7 @@ x-casaos:
     - arm64
   main: app
   store_app_id: public-pool-redis
-  category: Public Pool Core
+  category: Public Pool
   title:
     en_US: Public Pool Redis
   tagline:

@@ -1,5 +1,4 @@
 name: public-pool-bitcoin-cash
-
 services:
   app:
     container_name: public-pool-bitcoin-cash
@@ -11,57 +10,19 @@ services:
       - "7002:7002"
       - "9002:9002"
       - "8334:8334"
-    environment:
-      TZ: ${TZ}
-      RPC_USER: ${RPC_USER:-pooluser}
-      RPC_PASSWORD: ${RPC_PASSWORD:-poolpassword}
-    command: >
-      /bin/sh -lc '
-      mkdir -p /root/.bitcoin;
-      if [ ! -f /root/.bitcoin/bitcoin.conf ]; then
-        cat > /root/.bitcoin/bitcoin.conf <<EOF
-      server=1
-      prune=550
-      wallet=default
-      rpcbind=0.0.0.0
-      rpcallowip=0.0.0.0/0
-      rpcport=9002
-      rpcuser=${RPC_USER:-pooluser}
-      rpcpassword=${RPC_PASSWORD:-poolpassword}
-      port=8334
-      zmqpubhashblock=tcp://0.0.0.0:7002
-      EOF
-      fi;
-      exec /usr/bin/bitcoind -printtoconsole -conf=/root/.bitcoin/bitcoin.conf
-      '
-    x-casaos:
-      volumes:
-        - container: /root/.bitcoin
-          description:
-            en_US: Bitcoin Cash blockchain and wallet data.
-      ports:
-        - container: "7002"
-          description:
-            en_US: ZMQ block notification port.
-        - container: "9002"
-          description:
-            en_US: Bitcoin Cash RPC port.
-        - container: "8334"
-          description:
-            en_US: Bitcoin Cash P2P port.
-
+    command: "/usr/bin/bitcoind -printtoconsole -server -prune=550 -wallet=default -zmqpubhashblock=tcp://0.0.0.0:7002 -rpcbind=0.0.0.0 -rpcport=9002 -rpcallowip=0.0.0.0/0 -port=8334 -rpcuser=pooluser -rpcpassword=poolpassword"
 x-casaos:
   architectures:
     - amd64
   main: app
   store_app_id: public-pool-bitcoin-cash
-  category: Public Pool Coins
+  category: Public Pool
   title:
     en_US: Bitcoin Cash (BCH) Node
   tagline:
     en_US: Bitcoin Cash pruned node for Public Pool.
   description:
-    en_US: Bitcoin Cash daemon node for Public Pool mining stack. Runs in pruned mode with RPC and ZMQ enabled.
+    en_US: Bitcoin Cash node with RPC and ZMQ enabled.
   developer: Public Pool
   author: Public Pool
   icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoin-cash/icon.png

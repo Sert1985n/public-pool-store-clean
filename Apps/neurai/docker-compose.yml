@@ -1,11 +1,11 @@
-name: neurai
+name: public-pool-neurai
 services:
   app:
-    container_name: xna
+    container_name: public-pool-neurai
     image: theretromike/nodes:neurai
-    restart: always
+    restart: unless-stopped
     volumes:
-      - /media/ZimaOS-HD/NodeData/xna:/root/.neurai
+      - /DATA/AppData/public-pool-neurai/data:/root/.neurai
     ports:
       - "7011:7011"
       - "9011:9011"
@@ -25,15 +25,15 @@ x-casaos:
   architectures:
     - amd64
   main: app
-  description:
-    en_us: Neurai Cryptocurrency Node. Can be used in conjunction with Miningcore Apps to solo mine.
-  tagline:
-    en_us: Neurai Cryptocurrency Node.
-  developer: Retro Mike
-  author: Retro Mike
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/neurai/icon.png
-  thumbnail: ""
+  store_app_id: public-pool-neurai
+  category: Public Pool Coins
   title:
-    en_us: NeurAI (XNA) Node
-  category: RetroMike
-  port_map: "8888"
+    en_US: NeurAI (XNA) Node
+  tagline:
+    en_US: Neurai pruned node for Public Pool.
+  description:
+    en_US: Neurai daemon node with RPC and ZMQ enabled.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/neurai/icon.png
+  port_map: "9011"

@@ -1,11 +1,11 @@
-name: retro-mike-bitcoin-silver
+name: public-pool-bitcoin-silver
 services:
   app:
-    container_name: btcs
+    container_name: public-pool-bitcoin-silver
     image: theretromike/nodes:bitcoinsilver
-    restart: always
+    restart: unless-stopped
     volumes:
-      - /media/ZimaOS-HD/NodeData/btcs:/root/.bitcoinsilver
+      - /DATA/AppData/public-pool-bitcoin-silver/data:/root/.bitcoinsilver
     ports:
       - "7015:7015"
       - "9015:9015"
@@ -14,15 +14,15 @@ x-casaos:
   architectures:
     - amd64
   main: app
-  description:
-    en_us: Bitcoin Silver Cryptocurrency Node. Can be used in conjunction with Miningcore Apps to solo mine.
-  tagline:
-    en_us: Bitcoin Silver Cryptocurrency Node.
-  developer: Retro Mike
-  author: Retro Mike
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoin-silver/icon.png
-  thumbnail: ""
+  store_app_id: public-pool-bitcoin-silver
+  category: Public Pool Coins
   title:
-    en_us: Bitcoin Silver (BTCS) Node
-  category: RetroMike
-  port_map: "8888"
+    en_US: Bitcoin Silver (BTCS) Node
+  tagline:
+    en_US: Bitcoin Silver pruned node for Public Pool.
+  description:
+    en_US: Bitcoin Silver daemon node with RPC and ZMQ enabled.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoin-silver/icon.png
+  port_map: "9015"

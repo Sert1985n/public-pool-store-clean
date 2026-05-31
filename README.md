@@ -1,13 +1,8 @@
 # Public Pool Pro — CasaOS App Store
 
-Чистый репозиторий CasaOS App Store для собственного multi-coin mining pool с Web UI панелью и отдельными приложениями монет.
+Чистый модульный репозиторий CasaOS App Store для собственного multi-coin mining pool.
 
-Идея простая: добавил ссылку магазина в CasaOS, увидел приложения, установил то, что нужно:
-
-```text
-Public Pool Pro        # основной стек пула: база, API, Web UI, pool core
-Coin Node Apps         # отдельные ноды монет, которые можно ставить по одной
-```
+Цель проекта — сделать нормальный магазин приложений для CasaOS, где можно установить весь пул целиком или поставить отдельные части по необходимости: базу данных, pool-core / Miningcore, Web UI, админ-панель и отдельные монеты.
 
 ## Ссылка для добавления в CasaOS
 
@@ -23,49 +18,225 @@ App Store → Custom Install / More → Add Source
 https://github.com/Sert1985n/public-pool-store-clean/archive/refs/heads/main.zip
 ```
 
-После добавления в магазине должны появиться:
+После добавления в магазине должны появиться приложения Public Pool.
+
+## Главный принцип
+
+Репозиторий должен быть модульным.
+
+Нужно иметь возможность установить:
 
 ```text
-Public Pool Pro
-Bitcoin Node
-Bitcoin Cash Node
-Litecoin Node
-Dogecoin Node
-Peercoin Node
-Monero Node
-Neurai Node
-другие монеты, которые добавлены в Apps/
+1. PostgreSQL отдельно
+2. Redis отдельно
+3. Pool Core / Miningcore отдельно
+4. Web UI отдельно
+5. Admin Panel отдельно
+6. каждую монету отдельно
+7. готовую полную сборку Public Pool Pro отдельно
 ```
 
-## Как должна работать установка
+Монеты должны быть отдельными CasaOS-приложениями, чтобы можно было поставить только нужные daemon-ноды.
 
-Есть два типа приложений.
+## Что нельзя удалять
 
-### 1. Public Pool Pro
+В папках монет нельзя удалять `icon.png`, если это нормальная иконка монеты.
 
-Основное приложение пула:
+Иконки нужны для CasaOS App Store, чтобы каждая монета отображалась красиво в магазине.
+
+Пример:
 
 ```text
-Public Pool Pro
-├── PostgreSQL        # база данных пула
-├── Redis             # быстрые live-данные и кэш
-├── Pool Core         # stratum / shares / blocks / payouts
-├── Pool API          # единый API для Web UI
-└── Web UI            # главная страница, монеты, аккаунты, выплаты
+Apps/bitcoin/icon.png
+Apps/bitcoin-cash/icon.png
+Apps/litecoin/icon.png
+Apps/dogecoin/icon.png
+Apps/peercoin/icon.png
+Apps/neurai/icon.png
+Apps/monero/icon.png
 ```
 
-Это приложение должно открывать главную Web UI панель пула.
+Если старая папка монеты содержит плохой `docker-compose.yml`, его можно заменить, но `icon.png` лучше сохранить.
 
-### 2. Coin Node Apps
+## Что нужно чистить
 
-Каждая монета может устанавливаться отдельно:
+Удалять или заменять нужно старые временные файлы:
+
+```text
+- старые README_UPLOAD*.txt
+- старые README_FIX.txt
+- старые UPDATED_BY_CHATGPT*.md
+- старые ICON_STATUS*.md
+- старые WEB_UI_UPDATE*.md
+- временные manifest-файлы
+- старые архивы app.tar.gz / site.tar.gz
+- старые ручные патчи панели
+- старые docker-compose.yml с hardcoded путями
+- старые docker-compose.yml с :latest без контроля
+- старые docker-compose.yml с чужими/неподходящими образами
+- старые per-coin Web UI заглушки
+```
+
+Не нужно оставлять мусор, который не используется для установки нормального приложения.
+
+## Правильная структура репозитория
+
+```text
+Apps/
+├── public-pool-pro/          # полная установка всего стека
+├── public-pool-postgres/     # база PostgreSQL
+├── public-pool-redis/        # Redis
+├── public-pool-core/         # Miningcore / pool-core
+├── public-pool-admin/        # админ-панель управления пулом
+├── public-pool-web/          # Web UI для майнеров
+├── bitcoin/                  # отдельная нода Bitcoin
+├── bitcoin-cash/             # отдельная нода Bitcoin Cash
+├── bitcoin-cash-ii/          # отдельная нода Bitcoin Cash II
+├── bitcoin-silver/           # отдельная нода Bitcoin Silver
+├── litecoin/                 # отдельная нода Litecoin
+├── dogecoin/                 # отдельная нода Dogecoin
+├── peercoin/                 # отдельная нода Peercoin
+├── neurai/                   # отдельная нода Neurai
+├── monero/                   # отдельная нода Monero
+└── ...                       # другие монеты
+```
+
+Каждое приложение должно иметь:
+
+```text
+docker-compose.yml
+icon.png
+```
+
+Для главных приложений желательно добавить:
+
+```text
+screenshot-1.png
+thumbnail.png
+```
+
+## Категории в CasaOS
+
+Нужны нормальные категории:
+
+```text
+Public Pool Core
+Public Pool Coins
+Public Pool Web
+Public Pool Tools
+```
+
+Старые категории вроде `RetroMike`, `Templates`, `Utilities` и прочий мусор не нужны.
+
+## Базовые приложения
+
+### public-pool-postgres
+
+Отдельное приложение PostgreSQL для базы пула.
+
+Должно хранить данные в:
+
+```text
+/DATA/AppData/public-pool-postgres/data
+```
+
+Должно использовать нормальные переменные:
+
+```text
+POSTGRES_DB
+POSTGRES_USER
+POSTGRES_PASSWORD
+TZ
+```
+
+### public-pool-redis
+
+Отдельное приложение Redis для кэша и live-данных.
+
+Должно хранить данные в:
+
+```text
+/DATA/AppData/public-pool-redis/data
+```
+
+### public-pool-core
+
+Отдельное приложение для Miningcore / pool-core.
+
+Задачи:
+
+```text
+- stratum ports
+- shares
+- blocks
+- payouts
+- miners
+- balances
+- pool API
+- подключение к PostgreSQL
+- подключение к coin daemons
+```
+
+Конфиги должны храниться в:
+
+```text
+/DATA/AppData/public-pool-core/config
+/DATA/AppData/public-pool-core/coins
+/DATA/AppData/public-pool-core/logs
+```
+
+### public-pool-admin
+
+Админ-панель нужна отдельно.
+
+Она должна позволять:
+
+```text
+- добавлять монеты в конфиг пула;
+- включать и выключать монеты;
+- настраивать stratum ports;
+- задавать daemon RPC host / port / user / password;
+- создавать wallet config для монет;
+- добавлять pool wallet address;
+- задавать payout scheme;
+- задавать минимальную выплату;
+- задавать fee;
+- проверять daemon status;
+- проверять синхронизацию ноды;
+- проверять RPC;
+- перегенерировать config для pool-core;
+- перезапускать только pool-core, если пользователь сам нажал кнопку.
+```
+
+Админ-панель не должна сама удалять данные, кошельки, блокчейн или базу.
+
+### public-pool-web
+
+Web UI для майнеров.
+
+Должен показывать:
+
+```text
+- главную страницу монет;
+- страницу монеты;
+- account page;
+- workers;
+- rewards;
+- payouts;
+- blocks;
+- charts;
+- network stats;
+- prices.
+```
+
+## Приложения монет
+
+Каждая монета должна быть отдельной папкой в `Apps/`.
+
+Пример:
 
 ```text
 Apps/bitcoin/
-├── docker-compose.yml
-└── icon.png
-
-Apps/bitcoin-cash/
 ├── docker-compose.yml
 └── icon.png
 
@@ -74,110 +245,41 @@ Apps/litecoin/
 └── icon.png
 ```
 
-Так можно поставить только нужные монеты, а не запускать всё сразу.
-
-## Что нельзя делать
-
-В репозитории не должно быть старого мусора:
+Каждая монета должна:
 
 ```text
-- временные README_UPLOAD / README_FIX файлы;
-- отчёты UPDATED_BY_CHATGPT;
-- старые инструкции установки панели;
-- архивы временных частей панели;
-- заглушки вместо настоящего API;
-- fake hashrate / fake reward / fake balance;
-- чужая статистика с других пулов;
-- жёсткие локальные пути без CasaOS-переменных;
-- пароли по умолчанию без возможности изменить;
-- приложения без нормального x-casaos metadata;
-- приложения без icon.png.
+- ставиться отдельно;
+- иметь свой icon.png;
+- хранить blockchain data в /DATA/AppData/<app-id>/data;
+- открывать только нужные RPC/P2P/ZMQ порты;
+- не использовать hardcoded /media/ZimaOS-HD/... пути;
+- не использовать одинаковые container_name для разных приложений;
+- не хранить пароли прямо как poolpassword без возможности изменения;
+- иметь нормальный x-casaos metadata;
+- иметь category: Public Pool Coins.
 ```
 
-## Что должно остаться в чистом репозитории
+## Полная установка Public Pool Pro
+
+`public-pool-pro` — это удобная полная сборка.
+
+Она должна поднимать:
 
 ```text
-README.md
-category-list.json
-Apps/
-├── public-pool-pro/
-│   ├── docker-compose.yml
-│   └── icon.png
-├── bitcoin/
-│   ├── docker-compose.yml
-│   └── icon.png
-├── bitcoin-cash/
-│   ├── docker-compose.yml
-│   └── icon.png
-├── litecoin/
-│   ├── docker-compose.yml
-│   └── icon.png
-└── другие монеты...
+PostgreSQL
+Redis
+Pool Core / Miningcore
+Pool Admin Panel
+Pool Web UI
 ```
 
-## Требования к каждому приложению CasaOS
+Монеты можно не включать все сразу. Лучше сделать так, чтобы пользователь устанавливал нужные монеты отдельно.
 
-Каждая папка в `Apps/` должна быть отдельным устанавливаемым приложением.
+## Web UI
 
-Минимум:
+Панель должна быть современной, тёмной, быстрой и удобной для майнеров.
 
-```text
-docker-compose.yml
-icon.png
-```
-
-Желательно:
-
-```text
-screenshot-1.png
-thumbnail.png
-```
-
-В `docker-compose.yml` обязательно должно быть:
-
-```text
-name
-services
-x-casaos
-```
-
-`x-casaos` должен содержать:
-
-```text
-architectures
-main
-title
-description
-tagline
-developer
-author
-category
-icon
-port_map, если есть Web UI
-```
-
-## Хранение данных
-
-Все данные должны храниться в CasaOS-директориях:
-
-```text
-/DATA/AppData/public-pool-pro/...
-/DATA/AppData/bitcoin/...
-/DATA/AppData/bitcoin-cash/...
-/DATA/AppData/litecoin/...
-```
-
-Не использовать старые жёсткие пути вида:
-
-```text
-/media/ZimaOS-HD/NodeData/...
-```
-
-Такие пути нужно заменить на нормальные CasaOS volume paths.
-
-## Web UI Public Pool Pro
-
-Главная страница должна показывать:
+### Главная страница
 
 ```text
 Coin
@@ -192,7 +294,7 @@ Blocks
 Quick buttons: Coin / Account / Help
 ```
 
-Страница монеты должна показывать:
+### Страница монеты
 
 ```text
 Hashrate chart
@@ -208,7 +310,7 @@ Last block
 Daemon status
 ```
 
-Account page должна иметь:
+### Account page
 
 ```text
 Dashboard
@@ -232,9 +334,28 @@ Best share
 Last share
 ```
 
-## Источники данных
+Rewards:
 
-Панель должна брать данные только из собственного стека:
+```text
+Hour
+12 Hours
+24 Hours
+Week
+Month
+```
+
+Payouts:
+
+```text
+Time
+Amount
+Transaction ID
+Status
+```
+
+## Требования к данным
+
+Панель должна брать статистику только из собственного стека:
 
 ```text
 miners / workers       → Pool Core / database
@@ -248,12 +369,75 @@ network hashrate       → coin daemon RPC or calculated API
 price                  → market API only as price source
 ```
 
-## Цель
-
-Сделать нормальный CasaOS App Store:
+Запрещено:
 
 ```text
-CasaOS → Add Source → Public Pool Pro + отдельные монеты → Install → работает
+- подставлять чужую статистику;
+- копировать данные с Molepool или других пулов;
+- показывать fake hashrate / fake reward / fake balance;
+- использовать Web UI с заглушками вместо настоящего API;
+- делать сломанные Web UI панели на каждую монету;
+- завязывать установку на ручные архивы и временные патчи;
+- удалять icon.png монет без причины.
 ```
 
-Без старого мусора, без фейковых данных, без временных панелей и без ручной сборки сломанных частей.
+## Хранение данных
+
+Все важные данные должны храниться в `/DATA/AppData/`.
+
+Примеры:
+
+```text
+/DATA/AppData/public-pool-postgres/data
+/DATA/AppData/public-pool-redis/data
+/DATA/AppData/public-pool-core/config
+/DATA/AppData/public-pool-core/coins
+/DATA/AppData/public-pool-core/logs
+/DATA/AppData/public-pool-admin/data
+/DATA/AppData/public-pool-web/config
+/DATA/AppData/bitcoin/data
+/DATA/AppData/litecoin/data
+/DATA/AppData/dogecoin/data
+```
+
+Обновление контейнеров не должно удалять базу, blockchain data, wallets, blocks, payouts и историю пула.
+
+## Принцип сборки
+
+Проект должен быть собран как чистый модульный CasaOS App Store:
+
+```text
+1. отдельно ставятся базовые сервисы;
+2. отдельно ставятся монеты;
+3. отдельно ставится Web UI;
+4. отдельно ставится admin panel;
+5. есть полная сборка public-pool-pro;
+6. у каждой монеты есть своя иконка;
+7. данные не фейковые;
+8. конфиги не хардкодятся под один сервер;
+9. всё хранится в /DATA/AppData;
+10. установка должна работать из CasaOS без ручной сборки.
+```
+
+## Назначение
+
+Итоговая схема:
+
+```text
+CasaOS App Store
+├── Public Pool Pro
+├── Public Pool PostgreSQL
+├── Public Pool Redis
+├── Public Pool Core
+├── Public Pool Admin
+├── Public Pool Web UI
+├── Bitcoin Node
+├── Litecoin Node
+├── Dogecoin Node
+├── Peercoin Node
+├── Neurai Node
+├── Monero Node
+└── другие монеты
+```
+
+Пользователь должен иметь выбор: установить всё сразу или поставить только нужные части по отдельности.

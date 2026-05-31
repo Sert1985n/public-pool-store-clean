@@ -1,32 +1,22 @@
 [
   {
-    "name": "Cryptocurrency Nodes",
-    "font": "currency-usd",
-    "description": "Cryptocurrency coin nodes and wallets"
-  },
-  {
-    "name": "Core Services",
+    "name": "Public Pool Core",
     "font": "database",
-    "description": "Miningcore, PostgreSQL and backend services"
+    "description": "Database, Redis and pool core services"
   },
   {
-    "name": "Web UI",
+    "name": "Public Pool Coins",
+    "font": "currency-usd",
+    "description": "Coin daemon nodes for Public Pool"
+  },
+  {
+    "name": "Public Pool Web",
     "font": "monitor-dashboard",
-    "description": "Web interfaces and pool pages"
+    "description": "Web UI and miner dashboards"
   },
   {
-    "name": "Templates",
-    "font": "file-document-outline",
-    "description": "Template apps for build-required nodes"
-  },
-  {
-    "name": "RetroMike",
-    "font": "toolbox-outline",
-    "description": "Retro Mike custom apps"
-  },
-  {
-    "name": "Utilities",
-    "font": "toolbox-outline",
-    "description": "Utilities and helper apps"
+    "name": "Public Pool Tools",
+    "font": "tools",
+    "description": "Admin tools for pool configuration"
   }
 ]

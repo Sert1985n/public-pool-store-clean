@@ -1,13 +1,11 @@
-# TEMPLATE APP
-# Build/publish image first, then replace local/kaspa:latest if needed.
-name: retro-mike-kaspa
+name: public-pool-kaspa
 services:
   app:
-    container_name: kas
-    image: local/kaspa:latest
-    restart: always
+    container_name: public-pool-kaspa
+    image: theretromike/nodes:kaspa
+    restart: unless-stopped
     volumes:
-      - /media/ZimaOS-HD/NodeData/kas:/root/.kaspa
+      - /DATA/AppData/public-pool-kaspa/data:/root/.kaspa
     ports:
       - "16110:16110"
       - "17110:17110"
@@ -15,15 +13,15 @@ x-casaos:
   architectures:
     - amd64
   main: app
-  description:
-    en_us: Kaspa node template. Build/import image first.
-  tagline:
-    en_us: Build-required node template for KAS.
-  developer: Retro Mike
-  author: Retro Mike
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/kaspa/icon.png
-  thumbnail: ""
+  store_app_id: public-pool-kaspa
+  category: Public Pool
   title:
-    en_us: Kaspa (KAS) Node Template
-  category: Templates
+    en_US: Kaspa (KAS) Node
+  tagline:
+    en_US: Kaspa node for Public Pool.
+  description:
+    en_US: Kaspa node for Public Pool.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/kaspa/icon.png
   port_map: "16110"

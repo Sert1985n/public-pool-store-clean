@@ -1,46 +1,68 @@
-name: retro-mike-bitcoin-cash
+name: public-pool-bitcoin-cash
+
 services:
   app:
-    container_name: bch
+    container_name: public-pool-bitcoin-cash
     image: theretromike/nodes:bitcoincash
-    restart: always
+    restart: unless-stopped
     volumes:
-      # Mounting docker.sock to allow docker management via the container
-      - /media/ZimaOS-HD/NodeData/bch:/root/.bitcoin
+      - /DATA/AppData/public-pool-bitcoin-cash/data:/root/.bitcoin
     ports:
       - "7002:7002"
       - "9002:9002"
       - "8334:8334"
-    command: "/usr/bin/bitcoind -printtoconsole -server -prune=550 -wallet=default -zmqpubhashblock=tcp://0.0.0.0:7002 -rpcbind=0.0.0.0 -rpcport=9002 -rpcallowip=0.0.0.0/0 -port=8334 -rpcuser=pooluser -rpcpassword=poolpassword"
+    environment:
+      TZ: ${TZ}
+      RPC_USER: ${RPC_USER:-pooluser}
+      RPC_PASSWORD: ${RPC_PASSWORD:-poolpassword}
+    command: >
+      /bin/sh -lc '
+      mkdir -p /root/.bitcoin;
+      if [ ! -f /root/.bitcoin/bitcoin.conf ]; then
+        cat > /root/.bitcoin/bitcoin.conf <<EOF
+      server=1
+      prune=550
+      wallet=default
+      rpcbind=0.0.0.0
+      rpcallowip=0.0.0.0/0
+      rpcport=9002
+      rpcuser=${RPC_USER:-pooluser}
+      rpcpassword=${RPC_PASSWORD:-poolpassword}
+      port=8334
+      zmqpubhashblock=tcp://0.0.0.0:7002
+      EOF
+      fi;
+      exec /usr/bin/bitcoind -printtoconsole -conf=/root/.bitcoin/bitcoin.conf
+      '
     x-casaos:
       volumes:
         - container: /root/.bitcoin
           description:
-            en_us: 'Container Path: /root/.bitcoin'
+            en_US: Bitcoin Cash blockchain and wallet data.
       ports:
         - container: "7002"
           description:
-            en_us: 'Container Port: 7002'
+            en_US: ZMQ block notification port.
         - container: "9002"
           description:
-            en_us: 'Container Port: 9002'
+            en_US: Bitcoin Cash RPC port.
         - container: "8334"
           description:
-            en_us: 'Container Port: 8334'
+            en_US: Bitcoin Cash P2P port.
+
 x-casaos:
   architectures:
     - amd64
   main: app
-  description:
-    en_us: Bitcoin Cash Cryptocurrency Node. Can be used in conjunction with Miningcore Apps to solo mine.
-  tagline:
-    en_us: Bitcoin Cash Cryptocurrency Node.
-  developer: Retro Mike
-  author: Retro Mike
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoin-cash/icon.png
-  thumbnail: ""
-  # Title for the application
+  store_app_id: public-pool-bitcoin-cash
+  category: Public Pool Coins
   title:
-    en_us: Bitcoin Cash (BCH) Node
-  category: RetroMike
-  port_map: "8888"
+    en_US: Bitcoin Cash (BCH) Node
+  tagline:
+    en_US: Bitcoin Cash pruned node for Public Pool.
+  description:
+    en_US: Bitcoin Cash daemon node for Public Pool mining stack. Runs in pruned mode with RPC and ZMQ enabled.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoin-cash/icon.png
+  port_map: "9002"

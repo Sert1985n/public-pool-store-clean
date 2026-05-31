@@ -1,0 +1,39 @@
+name: public-pool-web
+
+services:
+  app:
+    image: nginx:1.27-alpine
+    container_name: public-pool-web
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/public-pool-web/html:/usr/share/nginx/html:ro
+    ports:
+      - "8095:80"
+    x-casaos:
+      volumes:
+        - container: /usr/share/nginx/html
+          description:
+            en_US: Public Pool Web UI static files.
+      ports:
+        - container: "80"
+          description:
+            en_US: Public Pool Web UI.
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: app
+  store_app_id: public-pool-web
+  category: Public Pool Web
+  title:
+    en_US: Public Pool Web UI
+  tagline:
+    en_US: Web UI for Public Pool miners.
+  description:
+    en_US: Web UI container for Public Pool. Put built UI files into /DATA/AppData/public-pool-web/html or use Public Pool Pro when the full UI image is available.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-web/icon.png
+  index: /
+  port_map: "8095"

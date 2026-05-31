@@ -1,0 +1,65 @@
+name: public-pool-core
+
+services:
+  app:
+    image: theretromike/miningcore:latest
+    container_name: public-pool-core
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      TZ: ${TZ}
+      POSTGRES_HOST: ${POSTGRES_HOST:-host.docker.internal}
+      POSTGRES_PORT: ${POSTGRES_PORT:-5432}
+      POSTGRES_DB: ${POSTGRES_DB:-miningcore}
+      POSTGRES_USER: ${POSTGRES_USER:-miningcore}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-miningcore}
+    volumes:
+      - /DATA/AppData/public-pool-core/config/config.json:/app/config.json
+      - /DATA/AppData/public-pool-core/config/coins.json:/app/build/coins.json
+      - /DATA/AppData/public-pool-core/logs:/app/logs
+    ports:
+      - "4000:4000"
+      - "6001-6025:6001-6025"
+      - "6201-6225:6201-6225"
+      - "6301-6325:6301-6325"
+      - "6401-6425:6401-6425"
+    x-casaos:
+      volumes:
+        - container: /app/config.json
+          description:
+            en_US: Miningcore main config file.
+        - container: /app/build/coins.json
+          description:
+            en_US: Miningcore coins definition file.
+        - container: /app/logs
+          description:
+            en_US: Miningcore logs directory.
+      ports:
+        - container: "4000"
+          description:
+            en_US: Miningcore API port.
+        - container: "6001-6025"
+          description:
+            en_US: Stratum ports range.
+
+x-casaos:
+  architectures:
+    - amd64
+  main: app
+  store_app_id: public-pool-core
+  category: Public Pool Core
+  title:
+    en_US: Public Pool Core
+  tagline:
+    en_US: Miningcore / pool-core service.
+  description:
+    en_US: Miningcore pool-core service for Public Pool. Requires PostgreSQL and coin daemon nodes with RPC/ZMQ enabled.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/public-pool-core/icon.png
+  port_map: "4000"
+  tips:
+    before_install:
+      en_US: |
+        Create /DATA/AppData/public-pool-core/config/config.json and coins.json before starting, or use Public Pool Admin to manage these files.

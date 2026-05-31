@@ -1,16 +1,28 @@
-# Public Pool Pro — CasaOS App Store
+# Public Pool — CasaOS App Store
 
 Модульный CasaOS App Store для Public Pool.
 
 ## Source URL для CasaOS
 
 ```text
+https://github.com/Sert1985n/public-pool/archive/refs/heads/main.zip
+```
+
+До переименования репозитория временная ссылка:
+
+```text
 https://github.com/Sert1985n/public-pool-store-clean/archive/refs/heads/main.zip
 ```
 
-## Приложения
+## Категория CasaOS
 
-Базовые сервисы:
+Все приложения должны быть в одной категории:
+
+```text
+Public Pool
+```
+
+## Приложения
 
 ```text
 Public Pool Pro
@@ -19,79 +31,90 @@ Public Pool Redis
 Public Pool Core
 Public Pool Admin
 Public Pool Web UI
+Bitcoin Node
+Bitcoin Cash Node
+Bitcoin Cash II Node
+Bitcoin Silver Node
+Litecoin Node
+Dogecoin Node
+Peercoin Node
+NeurAI Node
+Monero Node
 ```
-
-Монеты устанавливаются отдельно из раздела `Public Pool Coins`.
 
 ## Структура
 
 ```text
-Apps/
-├── public-pool-pro/
-├── public-pool-postgres/
-├── public-pool-redis/
-├── public-pool-core/
-├── public-pool-admin/
-├── public-pool-web/
-├── bitcoin/
-├── bitcoin-cash/
-├── litecoin/
-├── dogecoin/
-├── peercoin/
-├── neurai/
-├── monero/
-└── ...
+Apps/public-pool-pro/
+Apps/public-pool-postgres/
+Apps/public-pool-redis/
+Apps/public-pool-core/
+Apps/public-pool-admin/
+Apps/public-pool-web/
+Apps/bitcoin/
+Apps/bitcoin-cash/
+Apps/bitcoin-cash-ii/
+Apps/bitcoin-silver/
+Apps/litecoin/
+Apps/dogecoin/
+Apps/peercoin/
+Apps/neurai/
+Apps/monero/
 ```
 
 ## Данные
 
 Все данные приложений хранятся в `/DATA/AppData/`.
 
-Примеры:
-
 ```text
+/DATA/AppData/public-pool-pro/web
+/DATA/AppData/public-pool-pro/admin-db
+/DATA/AppData/public-pool-pro/postgres
+/DATA/AppData/public-pool-pro/redis
+
 /DATA/AppData/public-pool-postgres/data
 /DATA/AppData/public-pool-redis/data
 /DATA/AppData/public-pool-core/config
 /DATA/AppData/public-pool-core/logs
+/DATA/AppData/public-pool-admin/database
+/DATA/AppData/public-pool-admin/config
+/DATA/AppData/public-pool-web/html
+
 /DATA/AppData/public-pool-bitcoin/data
 /DATA/AppData/public-pool-bitcoin-cash/data
+/DATA/AppData/public-pool-bitcoin-cash-ii/data
+/DATA/AppData/public-pool-bitcoin-silver/data
+/DATA/AppData/public-pool-litecoin/data
+/DATA/AppData/public-pool-dogecoin/data
+/DATA/AppData/public-pool-peercoin/data
+/DATA/AppData/public-pool-neurai/data
+/DATA/AppData/public-pool-monero/data
 ```
-
-## Ноды монет
-
-Каждая монета — отдельное приложение CasaOS с собственным `docker-compose.yml` и `icon.png`.
-
-Bitcoin-like ноды запускаются в prune-режиме. Monero использует свой prune-режим.
 
 ## Public Pool Core
 
-`Public Pool Core` запускает Miningcore / pool-core и использует конфиги:
+Конфиги Miningcore:
 
 ```text
 /DATA/AppData/public-pool-core/config/config.json
 /DATA/AppData/public-pool-core/config/coins.json
 ```
 
-## Public Pool Admin
-
-`Public Pool Admin` открывает файловую админ-панель для конфигов пула и данных `/DATA/AppData/`.
-
-## Public Pool Web UI
-
-`Public Pool Web UI` открывает веб-панель пула.
-
 ## Порядок установки
 
-Минимальный порядок:
+```text
+1. Public Pool Pro
+2. Public Pool Core
+3. нужные монеты
+```
+
+Или по частям:
 
 ```text
 1. Public Pool PostgreSQL
 2. Public Pool Redis
-3. нужные Coin Nodes
+3. нужные монеты
 4. Public Pool Core
 5. Public Pool Admin
 6. Public Pool Web UI
 ```
-
-Или поставить `Public Pool Pro` как общий стек, а монеты добавить отдельно.

@@ -1,14 +1,11 @@
-# TEMPLATE APP
-# Build/publish image from source first, then replace local/komodo:latest with your built image.
-# Source repo: https://github.com/GLEECBTC/komodo-daemon
-name: retro-mike-komodo
+name: public-pool-komodo
 services:
   app:
-    container_name: komodo
-    image: local/komodo:latest
-    restart: always
+    container_name: public-pool-komodo
+    image: theretromike/nodes:komodo
+    restart: unless-stopped
     volumes:
-      - /media/ZimaOS-HD/NodeData/komodo:/root/.komodo
+      - /DATA/AppData/public-pool-komodo/data:/root/.komodo
     ports:
       - "7035:7035"
       - "9035:9035"
@@ -17,15 +14,15 @@ x-casaos:
   architectures:
     - amd64
   main: app
-  description:
-    en_us: Komodo (KMD) Node Template. Template added to project structure. Build/import image first.
-  tagline:
-    en_us: Build-required node template for KMD.
-  developer: Retro Mike
-  author: Retro Mike
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/komodo/icon.png
-  thumbnail: ""
+  store_app_id: public-pool-komodo
+  category: Public Pool
   title:
-    en_us: Komodo (KMD) Node Template
-  category: RetroMike
-  port_map: "8888"
+    en_US: Komodo Node
+  tagline:
+    en_US: Komodo node.
+  description:
+    en_US: Komodo node.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/komodo/icon.png
+  port_map: "9035"

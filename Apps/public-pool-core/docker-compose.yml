@@ -48,7 +48,7 @@ x-casaos:
     - amd64
   main: app
   store_app_id: public-pool-core
-  category: Public Pool Core
+  category: Public Pool
   title:
     en_US: Public Pool Core
   tagline:

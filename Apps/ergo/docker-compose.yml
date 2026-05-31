@@ -1,13 +1,11 @@
-# TEMPLATE APP
-# Build/publish image first, then replace local/ergo:latest if needed.
-name: retro-mike-ergo
+name: public-pool-ergo
 services:
   app:
-    container_name: erg
+    container_name: public-pool-ergo
     image: local/ergo:latest
-    restart: always
+    restart: unless-stopped
     volumes:
-      - /media/ZimaOS-HD/NodeData/erg:/root/.ergo
+      - /DATA/AppData/public-pool-ergo/data:/root/.ergo
     ports:
       - "9051:9051"
       - "9030:9030"
@@ -15,15 +13,15 @@ x-casaos:
   architectures:
     - amd64
   main: app
-  description:
-    en_us: Ergo node template. Build/import image first.
-  tagline:
-    en_us: Build-required node template for ERG.
-  developer: Retro Mike
-  author: Retro Mike
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/ergo/icon.png
-  thumbnail: ""
+  store_app_id: public-pool-ergo
+  category: Public Pool
   title:
-    en_us: Ergo (ERG) Node Template
-  category: Templates
+    en_US: Ergo (ERG) Node
+  tagline:
+    en_US: Ergo node for Public Pool.
+  description:
+    en_US: Ergo node for Public Pool.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/ergo/icon.png
   port_map: "9051"

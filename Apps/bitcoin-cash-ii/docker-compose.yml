@@ -1,11 +1,11 @@
-name: retro-mike-bitcoin-cash-ii
+name: public-pool-bitcoin-cash-ii
 services:
   app:
-    container_name: app-bitcoin-cash-ii
+    container_name: public-pool-bitcoin-cash-ii
     image: theretromike/nodes:bitcoincashii
-    restart: always
+    restart: unless-stopped
     volumes:
-      - /media/ZimaOS-HD/NodeData/app-bitcoin-cash-ii:/data
+      - /DATA/AppData/public-pool-bitcoin-cash-ii/data:/data
     ports:
       - "7116:7016"
       - "9116:9016"
@@ -18,31 +18,21 @@ services:
         [ -x "$x" ] && BIN="$x" && break;
       done;
       [ -n "$BIN" ] || { echo "BCH2 daemon not found"; exit 1; };
-      exec "$BIN"
-      -datadir=/data
-      -printtoconsole
-      -server=1
-      -prune=550
-      -rpcbind=0.0.0.0
-      -rpcallowip=0.0.0.0/0
-      -rpcport=9016
-      -rpcuser=pooluser
-      -rpcpassword=poolpassword
-      -zmqpubhashblock=tcp://0.0.0.0:7016
+      exec "$BIN" -datadir=/data -printtoconsole -server=1 -prune=550 -rpcbind=0.0.0.0 -rpcallowip=0.0.0.0/0 -rpcport=9016 -rpcuser=pooluser -rpcpassword=poolpassword -zmqpubhashblock=tcp://0.0.0.0:7016
       '
 x-casaos:
   architectures:
     - amd64
   main: app
-  description:
-    en_us: Bitcoin Cash II cryptocurrency node.
-  tagline:
-    en_us: Bitcoin Cash II (BCH2) Node.
-  developer: public-pool-btc.ru
-  author: public-pool-btc.ru
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoin-cash-ii/icon.png
-  thumbnail: ""
+  store_app_id: public-pool-bitcoin-cash-ii
+  category: Public Pool Coins
   title:
-    en_us: Bitcoin Cash II (BCH2) Node
-  category: RetroMike
+    en_US: Bitcoin Cash II (BCH2) Node
+  tagline:
+    en_US: Bitcoin Cash II pruned node for Public Pool.
+  description:
+    en_US: Bitcoin Cash II daemon node with RPC and ZMQ enabled.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoin-cash-ii/icon.png
   port_map: "9116"

@@ -1,22 +1,7 @@
 [
   {
-    "name": "Public Pool Core",
-    "font": "database",
-    "description": "Database, Redis and pool core services"
-  },
-  {
-    "name": "Public Pool Coins",
+    "name": "Public Pool",
     "font": "currency-usd",
-    "description": "Coin daemon nodes for Public Pool"
-  },
-  {
-    "name": "Public Pool Web",
-    "font": "monitor-dashboard",
-    "description": "Web UI and miner dashboards"
-  },
-  {
-    "name": "Public Pool Tools",
-    "font": "tools",
-    "description": "Admin tools for pool configuration"
+    "description": "Public Pool mining pool apps and coin nodes"
   }
 ]

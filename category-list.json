@@ -2,26 +2,6 @@
   {
     "name": "Public Pool",
     "font": "currency-usd",
-    "description": "Public Pool mining pool apps and coin nodes"
-  },
-  {
-    "name": "Public Pool Core",
-    "font": "database",
-    "description": "Public Pool base services"
-  },
-  {
-    "name": "Public Pool Coins",
-    "font": "currency-usd",
-    "description": "Public Pool coin nodes"
-  },
-  {
-    "name": "Public Pool Web",
-    "font": "monitor-dashboard",
-    "description": "Public Pool web panels"
-  },
-  {
-    "name": "Public Pool Tools",
-    "font": "tools",
-    "description": "Public Pool admin tools"
+    "description": "Mining pool apps"
   }
 ]

@@ -1,34 +1,27 @@
-name: postgresql
+name: public-pool-postgres-legacy
 services:
   app:
-    container_name: postgresql
+    container_name: public-pool-postgres-legacy
     image: postgres:17.4
     restart: unless-stopped
     volumes:
-      - /media/ZimaOS-HD/postgres:/var/lib/postgresql/data
+      - /DATA/AppData/public-pool-postgres-legacy/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    environment:
-      - POSTGRES_DB=miningcore
-      - POSTGRES_USER=miningcore
-      - POSTGRES_PASSWORD=miningcore
-      - TZ=Europe/Berlin
 x-casaos:
   architectures:
     - amd64
-    - arm
     - arm64
   main: app
-  store_app_id: postgres
-  category: Core Services
+  store_app_id: public-pool-postgres-legacy
+  category: Public Pool
   title:
-    en_us: PostgreSQL
+    en_US: PostgreSQL
   tagline:
-    en_us: PostgreSQL database for Miningcore
+    en_US: PostgreSQL database for Public Pool.
   description:
-    en_us: PostgreSQL database service for Miningcore data, shares, payouts and statistics.
-  developer: Retro Mike
-  author: Retro Mike
-  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PostgreSQL/icon.png
-  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PostgreSQL/icon.png
+    en_US: PostgreSQL database service.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/postgres/icon.png
   port_map: "5432"

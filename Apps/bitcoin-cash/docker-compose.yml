@@ -2,13 +2,14 @@ name: public-pool-bitcoin-cash
 services:
   app:
     container_name: public-pool-bitcoin-cash
-    image: zquestz/bitcoin-cash-node:29.0.0
+    image: theretromike/nodes:bitcoincash
     restart: unless-stopped
     volumes:
-      - /DATA/AppData/public-pool-bitcoin-cash/data:/data
+      - /DATA/AppData/public-pool-bitcoin-cash/data:/root/.bitcoin
     ports:
-      - "9002:8332"
-      - "8334:8333"
+      - "7002:7002"
+      - "9002:9002"
+      - "8334:8334"
 x-casaos:
   architectures:
     - amd64
@@ -18,9 +19,9 @@ x-casaos:
   title:
     en_US: Bitcoin Cash (BCH) Node
   tagline:
-    en_US: Bitcoin Cash node.
+    en_US: Bitcoin Cash Cryptocurrency Node.
   description:
-    en_US: Bitcoin Cash node.
+    en_US: Bitcoin Cash Cryptocurrency Node.
   developer: Public Pool
   author: Public Pool
   icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoin-cash/icon.png

@@ -2,16 +2,13 @@ name: public-pool-ravencoin
 services:
   app:
     container_name: public-pool-ravencoin
-    image: dramirezrt/ravencoin-core-server:v4.6.1
-    restart: unless-stopped
+    image: theretromike/nodes:ravencoin
+    restart: always
     volumes:
       - /DATA/AppData/public-pool-ravencoin/data:/root/.raven
     ports:
-      - "8088:8080"
-      - "38766:38766"
-      - "38767:38767"
-      - "28332:28332"
-      - "28333:28333"
+      - "7010:7010"
+      - "9010:9010"
 x-casaos:
   architectures:
     - amd64
@@ -19,12 +16,12 @@ x-casaos:
   store_app_id: public-pool-ravencoin
   category: Public Pool
   title:
-    en_US: Ravencoin (RVN) Node
+    en_US: Ravencoin Node
   tagline:
-    en_US: Ravencoin node for Public Pool.
+    en_US: Ravencoin node.
   description:
-    en_US: Ravencoin node with ZMQ support.
+    en_US: Ravencoin node.
   developer: Public Pool
   author: Public Pool
   icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/ravencoin/icon.png
-  port_map: "8088"
+  port_map: "9010"

@@ -1,13 +1,13 @@
-name: miningcore-webui
+name: public-pool-miningcore-webui
 services:
   app:
-    container_name: miningcorewebui
+    container_name: public-pool-miningcore-webui
     image: theretromike/miningcorewebui:latest
     restart: unless-stopped
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
-      - /media/ZimaOS-HD/miningcore:/app/miningcore
+      - /DATA/AppData/public-pool-miningcore-webui/data:/app/miningcore
     ports:
       - "81:8080"
     environment:
@@ -25,16 +25,15 @@ x-casaos:
   architectures:
     - amd64
   main: app
-  store_app_id: miningcore-webui
-  category: Web UI
+  store_app_id: public-pool-miningcore-webui
+  category: Public Pool
   title:
-    en_us: Miningcore Web UI
+    en_US: Miningcore Web UI
   tagline:
-    en_us: Pool web interface
+    en_US: Pool web interface.
   description:
-    en_us: Miningcore Web UI for pool statistics, miners and wallet views. Uses host-gateway to reach Miningcore and PostgreSQL on the same server.
-  developer: Retro Mike
-  author: Retro Mike
-  icon: https://raw.githubusercontent.com/TheRetroMike/retromike-umbrel-app-store/master/retro-mike-miningcore-webui/webui.png
-  thumbnail: https://raw.githubusercontent.com/TheRetroMike/retromike-umbrel-app-store/master/retro-mike-miningcore-webui/webui.png
+    en_US: Miningcore Web UI for Public Pool.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/miningcore-webui/icon.png
   port_map: "81"

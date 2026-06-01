@@ -1,14 +1,11 @@
-# TEMPLATE APP
-# Build/publish image from source first, then replace local/zcash:latest with your built image.
-# Source repo: https://github.com/zcash/zcash
-name: retro-mike-zcash
+name: public-pool-zec
 services:
   app:
-    container_name: zcash
-    image: local/zcash:latest
-    restart: always
+    container_name: public-pool-zec
+    image: theretromike/nodes:zcash
+    restart: unless-stopped
     volumes:
-      - /media/ZimaOS-HD/NodeData/zcash:/root/.zcash
+      - /DATA/AppData/public-pool-zcash/data:/root/.zcash
     ports:
       - "7036:7036"
       - "9036:9036"
@@ -17,15 +14,15 @@ x-casaos:
   architectures:
     - amd64
   main: app
-  description:
-    en_us: Zcash (ZEC) Node Template. Template added to project structure. Build/import image first.
-  tagline:
-    en_us: Build-required node template for ZEC.
-  developer: Retro Mike
-  author: Retro Mike
-  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/zcash/icon.png
-  thumbnail: ""
+  store_app_id: public-pool-zcash
+  category: Public Pool
   title:
-    en_us: Zcash (ZEC) Node Template
-  category: RetroMike
-  port_map: "8888"
+    en_US: ZEC Node
+  tagline:
+    en_US: ZEC node.
+  description:
+    en_US: ZEC node.
+  developer: Public Pool
+  author: Public Pool
+  icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/zcash/icon.png
+  port_map: "9036"

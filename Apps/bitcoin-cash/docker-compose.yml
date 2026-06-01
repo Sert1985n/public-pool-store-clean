@@ -2,15 +2,13 @@ name: public-pool-bitcoin-cash
 services:
   app:
     container_name: public-pool-bitcoin-cash
-    image: theretromike/nodes:bitcoincash
+    image: zquestz/bitcoin-cash-node:29.0.0
     restart: unless-stopped
     volumes:
-      - /DATA/AppData/public-pool-bitcoin-cash/data:/root/.bitcoin
+      - /DATA/AppData/public-pool-bitcoin-cash/data:/data
     ports:
-      - "7002:7002"
-      - "9002:9002"
-      - "8334:8334"
-    command: "/usr/bin/bitcoind -printtoconsole -server -prune=550 -wallet=default -zmqpubhashblock=tcp://0.0.0.0:7002 -rpcbind=0.0.0.0 -rpcport=9002 -rpcallowip=0.0.0.0/0 -port=8334 -rpcuser=pooluser -rpcpassword=poolpassword"
+      - "9002:8332"
+      - "8334:8333"
 x-casaos:
   architectures:
     - amd64
@@ -20,9 +18,9 @@ x-casaos:
   title:
     en_US: Bitcoin Cash (BCH) Node
   tagline:
-    en_US: Bitcoin Cash pruned node for Public Pool.
+    en_US: Bitcoin Cash node.
   description:
-    en_US: Bitcoin Cash node with RPC and ZMQ enabled.
+    en_US: Bitcoin Cash node.
   developer: Public Pool
   author: Public Pool
   icon: https://raw.githubusercontent.com/Sert1985n/public-pool-store-clean/main/Apps/bitcoin-cash/icon.png
